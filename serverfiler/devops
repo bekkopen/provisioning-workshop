@@ -1,5 +1,7 @@
 #!/bin/sh
 
+
+# Alle filer ligger under hjemmekatalog for å gjøre det enklere i starten :)
 PID_FILE=/home/devops/devops.pid
 APP_HOME=/home/devops
 APP_JAR=devops.jar
@@ -9,14 +11,14 @@ case "$1" in
   start)
     if [ ! -f $PID_FILE ]; then
       echo "Starting devops..."
-      sudo mkdir -p $LOGS
+      mkdir -p $LOGS
       cd $APP_HOME
       nohup java -jar "$APP_JAR" 1>$LOGS/stdout.log 2>$LOGS/stderr.log &
       PID=$!
       cd -
       echo "Started devops with PID: ${PID}"
-      sudo touch ${PID_FILE}
-      sudo echo -e "${PID}" | sudo tee ${PID_FILE}
+      touch ${PID_FILE}
+      echo "${PID}" | tee ${PID_FILE}
     else
       echo "devops already running"
     fi
@@ -26,7 +28,7 @@ case "$1" in
     if [ -f $PID_FILE ]; then
       PID=`cat ${PID_FILE}`
       test -z $PID || kill $PID
-      sudo rm $PID_FILE
+      rm $PID_FILE
     else
       echo "devops already stopped"
     fi
