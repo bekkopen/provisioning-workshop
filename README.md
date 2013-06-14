@@ -11,19 +11,24 @@ Provision this:
 
 Serverspec
 ===========
-Installation
+Installation:
+
 Add this line to your application's Gemfile:
 
 gem 'serverspec'
+
 And then execute:
 
 $ bundle
+
 Or install it yourself as:
 
 $ gem install serverspec
 
-Getting Started
+Getting Started:
+
 $ serverspec-init
+
 Select a backend type:
 
   1) SSH
@@ -32,5 +37,6 @@ Select a backend type:
 Select number: 1
 
 Run it:
+
 $ cd serverspec
 $ rake spec
