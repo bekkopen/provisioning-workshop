@@ -13,7 +13,7 @@ Serverspec
 ===========
 Installation:
 
-Add this line to your application's Gemfile:
+Go to serverspec/ directory and add this line to your application's Gemfile:
 
 gem 'serverspec'
 
@@ -38,5 +38,4 @@ Select number: 1
 
 Run it:
 
-$ cd serverspec
 $ rake spec
