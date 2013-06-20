@@ -25,7 +25,7 @@ class httpserver {
 	  group => devops,
 	}
 
-	file { '/home/devops/devops':
+	file { '/etc/init.d/devops':
 	  ensure => present,
 	  source => 'puppet:///modules/devops/devops',
 	  owner  => devops,
