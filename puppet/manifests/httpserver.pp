@@ -8,20 +8,12 @@ class httpserver {
 			shell => '/bin/bash',
 	}
 
-	user {
-		'espenhh' : 
-			ensure => present,
-			home => '/home/espenhh',
-			password => '$1$kgEDeytZ$owi1vkUAE6FKDpGGuPRJ/.',
-			shell => '/bin/bash',
+	file { '/home/devops':
+	  ensure => directory,
+	  owner  => devops,
+	  group => devops,
 	}
 
-	user {
-		'arp' : 
-			ensure => present,
-			home => '/home/arp',
-			password => '$1$kgEDeytZ$owi1vkUAE6FKDpGGuPRJ/.',
-			shell => '/bin/bash',
-	}
+
 
 }
