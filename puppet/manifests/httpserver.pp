@@ -30,8 +30,42 @@ class httpserver {
 	  source => 'puppet:///modules/devops/devops',
 	  owner  => devops,
 	  group => devops,
-	  mode => 777,
+	  mode => 777
 	}
 
+	exec { 
+		'/etc/init.d/devops start':
+	}
+
+	file { '/etc/yum.repos.d/nginx.repo':
+	  ensure => present,
+	  content => '[nginx]
+name=nginx repo
+baseurl=http://nginx.org/packages/centos/6/$basearch/
+gpgcheck=0
+enabled=1',
+	notify => Package[nginx],
+	}
+
+	package { 'nginx' :
+		ensure => present,
+		notify => Service[nginx],
+	}
+
+	file { '/etc/nginx/conf.d/devops.conf':
+	  ensure => present,
+	  source => 'puppet:///modules/devops/devops.conf',
+	  notify => Service[nginx],
+	}
+
+	file { '/etc/nginx/conf.d/default.conf':
+	  ensure => absent,
+	  notify => Service[nginx],
+	}
+
+	service { 'nginx' :
+		ensure => running,
+
+	}
 
 }
