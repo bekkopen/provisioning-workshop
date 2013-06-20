@@ -14,6 +14,9 @@ class httpserver {
 	  group => devops,
 	}
 
+	package { 'java-1.7.0-openjdk.x86_64' :
+		ensure => present,
+	}
 
 
 }
