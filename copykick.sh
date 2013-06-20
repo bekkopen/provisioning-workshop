@@ -1,3 +1,3 @@
 #/bin/bash
 
-scp puppet/* root@176.58.109.213:/etc/puppetlabs/puppet/
+scp -r puppet/* root@178.79.160.213:/etc/puppetlabs/puppet/
