@@ -4,7 +4,7 @@ class httpserver {
 		'devops' : 
 			ensure => present,
 			home => '/home/devops',
-			password => sha1('devops123'),
+			password => '$1$kgEDeytZ$owi1vkUAE6FKDpGGuPRJ/.',
 			shell => '/bin/bash',
 	}
 
@@ -12,7 +12,7 @@ class httpserver {
 		'espenhh' : 
 			ensure => present,
 			home => '/home/espenhh',
-			password => sha1('devops123'),
+			password => '$1$kgEDeytZ$owi1vkUAE6FKDpGGuPRJ/.',
 			shell => '/bin/bash',
 	}
 
@@ -20,7 +20,7 @@ class httpserver {
 		'arp' : 
 			ensure => present,
 			home => '/home/arp',
-			password => sha1('devops123'),
+			password => '$1$kgEDeytZ$owi1vkUAE6FKDpGGuPRJ/.',
 			shell => '/bin/bash',
 	}
 
