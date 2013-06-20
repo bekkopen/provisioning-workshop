@@ -1,0 +1,8 @@
+     bundle agent test 
+     {   
+     files: 
+       "/tmp/cf_test_file"   
+           comment => "Promise that a plain file exists with stated permissions",
+           perms => mog("644", "root", "sys"),
+           create => "true";
+     }

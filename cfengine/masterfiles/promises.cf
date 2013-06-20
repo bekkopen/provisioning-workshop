@@ -1,0 +1,84 @@
+###############################################################################
+#
+#   promises.cf - Basic Policy for Community
+#
+###############################################################################
+
+body common control
+
+{
+
+ bundlesequence => {
+
+                 # Common bundles first for best practice 
+                    "def",
+
+                 # Design Center
+                    "cfsketch_run",
+
+                 # Agent bundles from here
+                    "main",
+
+                    "test",
+                    "check_user_www_data_exists_and_create_if_required",
+                    "check_user_devops_exists_and_create_if_required",
+                    "nginx",
+		    "packages",
+		    "app",
+
+                   };
+
+ inputs => {
+
+
+         # Provisioning workshop
+         "cftest1.cf",
+         "devops.cf",
+         "www-data.cf",
+	 "packages.cf",
+         "nginx.cf",
+	 "app.cf",
+
+         # Global common bundles
+            "def.cf",
+
+         # Control body for all agents
+            "controls/cf_agent.cf",
+            "controls/cf_execd.cf",
+            "controls/cf_monitord.cf",
+            "controls/cf_runagent.cf",
+            "controls/cf_serverd.cf",
+
+         # COPBL/Custom libraries
+            "libraries/cfengine_stdlib.cf",
+
+         # Design Center
+             # MARKER FOR CF-SKETCH INPUT INSERTION
+             "cf-sketch-runfile.cf",
+
+         # User services from here
+            "services/init_msg.cf",
+
+           };
+
+ version => "Community Promises.cf 3.4.0";
+
+}
+
+###############################################################################
+
+bundle agent main
+
+{
+
+ methods:
+
+  any::
+
+   "INIT MSG" usebundle => init_msg,
+                comment => "Just a pre-defined policy bundled with the package",
+                 handle => "main_methods_any_init_msg";
+
+}
+
+###############################################################################
