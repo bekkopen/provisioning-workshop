@@ -19,8 +19,7 @@ body common control
                  # Agent bundles from here
                     "main",
 
-                    "test",
-                    "check_user_www_data_exists_and_create_if_required",
+                    "check_user_steinim_exists_and_create_if_required",
                     "check_user_devops_exists_and_create_if_required",
                     "nginx",
 		    "packages",
@@ -32,9 +31,7 @@ body common control
 
 
          # Provisioning workshop
-         "cftest1.cf",
-         "devops.cf",
-         "www-data.cf",
+         "users.cf",
 	 "packages.cf",
          "nginx.cf",
 	 "app.cf",
