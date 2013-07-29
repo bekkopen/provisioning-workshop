@@ -4,10 +4,10 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>Smidigdagen</title>
+		<title>Sammenligning av provisjoneringsrammeverk</title>
 
-		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-		<meta name="author" content="Hakim El Hattab">
+		<meta name="description" content="Sammenligning av provisjoneringsrammeverk og testing med ServerSpec">
+		<meta name="author" content="Stian Mathiassen and Stein Inge Morisbak">
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -38,83 +38,277 @@
 			<div class="slides">
 
 				<section>
-					<h1>Reveal.js</h1>
-					<h3>HTML Presentations Made Easy</h3>
-					<p>
-						<small>Created by <a href="http://hakim.se">Hakim El Hattab</a> / <a href="http://twitter.com/hakimel">@hakimel</a></small>
-					</p>
+					<h2>Intro til provisjoneringsrammeverk</h2>
 				</section>
 
 				<section>
-					<h2>Heads Up</h2>
-					<p>
-						reveal.js is a framework for easily creating beautiful presentations using HTML. You'll need a browser with
-						support for CSS 3D transforms to see it in its full glory.
-					</p>
+					<h2>Hva er provisjoneringsrammeverk?</h2>
+					<ul>
+						<li>Automatisert oppsett av servere</li>
+						<li>Konfigurasjon som kode</li>
+					</ul>
+            <aside class="notes">
 
-					<aside class="notes">
-						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
-					</aside>
+            </aside>
 				</section>
 
-				<!-- Example of nested vertical slides -->
 				<section>
-					<section>
-						<h2>Vertical Slides</h2>
-						<p>
-							Slides can be nested inside of other slides,
-							try pressing <a href="#" class="navigate-down">down</a>.
-						</p>
-						<a href="#" class="image navigate-down">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
+					<h2>Eksempler</h2>
+					<ul>
+						<li>Lage brukere</li>
+						<li>Generere configfiler</li>
+						<li>Installere programvare</li>
+						<li>Starte/stoppe/restarte prosesser</li>
+						<li>Sette opp avhengigheter mellom operasjoner</li>
+					</ul>
+            <aside class="notes">
+
+            </aside>
+				</section>
+				<section>
+						<h2>Pros</h2>
+						<ul>
+						  <li>I kildekodekontroll.</li>
+							<li>Likere miljøer.</li>
+							<li>Selvdokumeterende (det er kode!)</li>
+              <li>Refactoring</li>
+							<li>Repeterbart (no need for manual rollback)</li>
+							<li>Deterministisk</li>
+							<li>Fjerner manuelle steg</li>
+							<li>Raskt å konfigurere opp et nytt miljø</li>
+							<li>Enklere å teste serveroppsett</li>
+						</ul>
+            <aside class="notes">
+              
+            </aside>
+				</section>
+				<section>
+						<h3>Cons</h3>
+						<ul>
+							<li>Uvant for "klassiske driftere"</li>
+							<li>Uvant med drift for utviklere</li>
+							<li>Oppstartskostnad
+								<ul>
+									<li>Opplæring</li>
+									<li>Migrering</li>
+								</ul>
+							</li>
+							<li>Krever en del av organisasjonen</li>
+						</ul>
+						<aside class="notes">
+							Organisasjon: kan være silobasert.
+					  </aside>
+				</section>
+
+	 			<section>
+					<h3>Ordforklaring</h3>
+					<ul>
+					<li>Master/Slave</li>
+					<li>SSH</li>
+					<li>Imperativt versus deklarativt</li>
+					</ul>
+				</section>
+
+	 			<section>
+					<div style="width: 50%; float: left">
+					<h3>Imperativt</h3>
+					<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+#!/bin/bash
+#Add more steps to check if
+#present and so on...
+
+yum install vim
+
+echo "set nocp" &gt; /etc/vim/vimrc
+					</code></pre>
+					</div>
+
+					<div style="width: 50%; float: right">
+					<h3>Deklarativt</h3>
+					<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+package { "vim":
+  ensure =&gt; present,
+}
+
+file { "/etc/vim/vimrc":
+  content =&gt; "set nocp",
+}
+					</code></pre>
+					</div>
+					<div style="clear: both"></div>
+				</section>
+
+	 			<section>
+					<h3>Oppgaven</h3>
+					<ul>
+						<li>An app user 'devops', with:</li>
+						<ul>
+						<li>'devops123' as password</li>
+						<li>a home directory</li>
+						<li>/bin/bash as the default shell</li>
+					</ul>
+						<li>an init script</li>
+						<li>nginx with a reverse proxy using example configuration</li>
+					</ul>
+				</section>
+
+				<section>
+				<section>
+					<h2>Ansible</h2>
+					<ul>
+						<li>Short info...</li>
+					</ul>
 					</section>
 					<section>
-						<h2>Basement Level 1</h2>
-						<p>Press down or up to navigate.</p>
+					<h2>Example</h2>
+					<ul>
+						<li>A user and a file</li>
+					</ul>
+					</section>
+
+					<section>
+					<h2>Installation and setup</h2>
+					<ul>
+						<li></li>
+					</ul>
 					</section>
 					<section>
-						<h2>Basement Level 2</h2>
-						<p>Cornify</p>
-						<a class="test" href="http://cornify.com">
-							<img width="280" height="326" src="https://s3.amazonaws.com/hakim-static/reveal-js/cornify.gif" alt="Unicorn">
-						</a>
+					<h1>Demo</h1>
 					</section>
 					<section>
-						<h2>Basement Level 3</h2>
-						<p>That's it, time to go back up.</p>
-						<a href="#/2" class="image">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Up arrow" style="-webkit-transform: rotate(180deg);">
-						</a>
+					<h2>Pros & Cons</h2>
+					<ul>
+						<li></li>
+					</ul>
 					</section>
 				</section>
 
 				<section>
-					<h2>Slides</h2>
-					<p>
-						Not a coder? No problem. There's a fully-featured visual editor for authoring these, try it out at <a href="http://slid.es" target="_blank">http://slid.es</a>.
-					</p>
+				<section>
+					<h2>Salt</h2>
+					<ul>
+						<li>Short info...</li>
+					</ul>
+					</section>
+					<section>
+					<h2>Example code</h2>
+					<ul>
+						<li>A user and a file</li>
+					</ul>
+					</section>
+
+					<section>
+					<h2>Installation and setup</h2>
+					<ul>
+						<li></li>
+					</ul>
+					</section>
+					<section>
+					<h1>Demo</h1>
+					</section>
+					<section>
+					<h2>Pros & Cons</h2>
+					<ul>
+						<li></li>
+					</ul>
+					</section>
 				</section>
 
 				<section>
-					<h2>Point of View</h2>
-					<p>
-						Press <strong>ESC</strong> to enter the slide overview.
-					</p>
-					<p>
-						Hold down alt and click on any element to zoom in on it using <a href="http://lab.hakim.se/zoom-js">zoom.js</a>. Alt + click anywhere to zoom back out.
-					</p>
+				<section>
+					<h2>Puppet</h2>
+					<ul>
+						<li>Short info...</li>
+					</ul>
+					</section>
+					<section>
+					<h2>Example code</h2>
+					<ul>
+						<li>A user and a file</li>
+					</ul>
+					</section>
+
+					<section>
+					<h2>Installation and setup</h2>
+					<ul>
+						<li></li>
+					</ul>
+					</section>
+					<section>
+					<h1>Demo</h1>
+					</section>
+					<section>
+					<h2>Pros & Cons</h2>
+					<ul>
+						<li></li>
+					</ul>
+					</section>
 				</section>
 
 				<section>
-					<h2>Works in Mobile Safari</h2>
-					<p>
-						Try it out! You can swipe through the slides and pinch your way to the overview.
-					</p>
+				<section>
+					<h2>Chef</h2>
+					<ul>
+						<li>Short info...</li>
+					</ul>
+					</section>
+					<section>
+					<h2>Example code</h2>
+					<ul>
+						<li>A user and a file</li>
+					</ul>
+					</section>
+
+					<section>
+					<h2>Installation and setup</h2>
+					<ul>
+						<li></li>
+					</ul>
+					</section>
+					<section>
+					<h1>Demo</h1>
+					</section>
+					<section>
+					<h2>Pros & Cons</h2>
+					<ul>
+						<li></li>
+					</ul>
+					</section>
 				</section>
 
 				<section>
-					<h2>Marvelous Unordered List</h2>
+				<section>
+					<h2>CFEngine</h2>
+					<ul>
+						<li>Short info...</li>
+					</ul>
+					</section>
+					<section>
+					<h2>Example code</h2>
+					<ul>
+						<li>A user and a file</li>
+					</ul>
+					</section>
+
+					<section>
+					<h2>Installation and setup</h2>
+					<ul>
+						<li></li>
+					</ul>
+					</section>
+					<section>
+					<h1>Demo</h1>
+					</section>
+					<section>
+					<h2>Pros & Cons</h2>
+					<ul>
+						<li></li>
+					</ul>
+					</section>
+				</section>
+
+				<section>
+					<h2>Summary</h2>
 					<ul>
 						<li>No order here</li>
 						<li>Or here</li>
@@ -122,9 +316,15 @@
 						<li>Or here</li>
 					</ul>
 				</section>
+				<section>
+				<h1>What did we forget?</h1>
+				</section>
+				<section>
+				<h1>To test!</h1>
+				</section>
 
 				<section>
-					<h2>Fantastic Ordered List</h2>
+					<h2>ServerSpec</h2>
 					<ol>
 						<li>One is smaller than...</li>
 						<li>Two is smaller than...</li>
@@ -132,145 +332,14 @@
 					</ol>
 				</section>
 
-				<section data-markdown>
-					<script type="text/template">
-						## Markdown support
-
-						For those of you who like that sort of thing. Instructions and a bit more info available [here](https://github.com/hakimel/reveal.js#markdown).
-
-						```
-						<section data-markdown>
-						  ## Markdown support
-
-						  For those of you who like that sort of thing.
-						  Instructions and a bit more info available [here](https://github.com/hakimel/reveal.js#markdown).
-						</section>
-						```
-					</script>
-				</section>
-
-				<section id="transitions">
-					<h2>Transition Styles</h2>
-					<p>
-						You can select from different transitions, like: <br>
-						<a href="?transition=cube#/transitions">Cube</a> -
-						<a href="?transition=page#/transitions">Page</a> -
-						<a href="?transition=concave#/transitions">Concave</a> -
-						<a href="?transition=zoom#/transitions">Zoom</a> -
-						<a href="?transition=linear#/transitions">Linear</a> -
-						<a href="?transition=fade#/transitions">Fade</a> -
-						<a href="?transition=none#/transitions">None</a> -
-						<a href="?#/transitions">Default</a>
-					</p>
-				</section>
-
-				<section id="themes">
-					<h2>Themes</h2>
-					<p>
-						Reveal.js comes with a few themes built in: <br>
-						<a href="?theme=sky#/themes">Sky</a> -
-						<a href="?theme=beige#/themes">Beige</a> -
-						<a href="?theme=simple#/themes">Simple</a> -
-						<a href="?theme=serif#/themes">Serif</a> -
-						<a href="?theme=night#/themes">Night</a> -
-						<a href="?#/themes">Default</a>
-					</p>
-					<p>
-						<small>
-							* Theme demos are loaded after the presentation which leads to flicker. In production you should load your theme in the <code>&lt;head&gt;</code> using a <code>&lt;link&gt;</code>.
-						</small>
-					</p>
-				</section>
-
-				<section>
-					<section data-state="alert">
-						<h2>Global State</h2>
-						<p>
-							Set <code>data-state="something"</code> on a slide and <code>"something"</code>
-							will be added as a class to the document element when the slide is open. This lets you
-							apply broader style changes, like switching the background.
-						</p>
-						<a href="#" class="image navigate-down">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
-					</section>
-					<section data-state="blackout">
-						<h2>"blackout"</h2>
-						<a href="#" class="image navigate-down">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
-					</section>
-					<section data-state="soothe">
-						<h2>"soothe"</h2>
-						<a href="#" class="image navigate-next">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Up arrow" style="-webkit-transform: rotate(-90deg);">
-						</a>
-					</section>
-				</section>
-
-				<section data-state="customevent">
-					<h2>Custom Events</h2>
-					<p>
-						Additionally custom events can be triggered on a per slide basis by binding to the <code>data-state</code> name.
-					</p>
-					<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
-Reveal.addEventListener( 'customevent', function() {
-	console.log( '"customevent" has fired' );
-} );
-					</code></pre>
-				</section>
-
-				<section>
-					<h2>Clever Quotes</h2>
-					<p>
-						These guys come in two forms, inline: <q cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						&ldquo;The nice thing about standards is that there are so many to choose from&rdquo;</q> and block:
-					</p>
-					<blockquote cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						&ldquo;For years there has been a theory that millions of monkeys typing at random on millions of typewriters would
-						reproduce the entire works of Shakespeare. The Internet has proven this theory to be untrue.&rdquo;
-					</blockquote>
-				</section>
-
-				<section>
-					<h2>Pretty Code</h2>
-					<pre><code data-trim contenteditable>
-function linkify( selector ) {
-  if( supports3DTransforms ) {
-
-    var nodes = document.querySelectorAll( selector );
-
-    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
-      var node = nodes[i];
-
-      if( !node.className ) ) {
-        node.className += ' roll';
-      }
-    };
-  }
-}
-					</code></pre>
-					<p>Courtesy of <a href="http://softwaremaniacs.org/soft/highlight/en/description/">highlight.js</a>.</p>
-				</section>
-
-				<section>
-					<h2>Intergalactic Interconnections</h2>
-					<p>
-						You can link between slides internally,
-						<a href="#/2/3">like this</a>.
-					</p>
-				</section>
-
-				<section>
 					<section>
-						<h2>Fragmented Views</h2>
-						<p>Hit the next arrow...</p>
-						<p class="fragment">... to step through ...</p>
-						<ol>
-							<li class="fragment"><code>any type</code></li>
-							<li class="fragment"><em>of view</em></li>
-							<li class="fragment"><strong>fragments</strong></li>
-						</ol>
+						<h2>What are you waiting for?</h2>
+						<ul>
+							<li>Describe your existing infrastructure with ServerSpec</li>
+							<li>Use Vagrant and VirtualBox to play around in a "real" environment.</li>
+							<li>Use a provisioning framework to make your tests go green</li>
+							<li>Go live!</li>
+						</ul>
 
 						<aside class="notes">
 							This slide has fragments which are also stepped through in the notes window.
