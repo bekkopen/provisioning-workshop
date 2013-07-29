@@ -1,0 +1,32 @@
+* Intro til provisjoneringsrammeverk
+* Pros & Cons
+* Ordforklaring
+* Per rammeverk
+  - Kort info om rammeverket
+  - Eksempelconfig/Syntax
+  - Installasjon + oppsett
+  - Demo
+  - Pros/Cons
+  
+Ansible (Stian):
+***********************
+
+
+Salt (Stein Inge):
+***********************
+
+
+Puppet (Stian):
+***********************
+
+
+Chef (Stian):
+***********************
+
+
+CFEngine (Stein Inge):
+***********************  
+
+* (Serverspec)
+* Oppsumering (kåre en vinner!)
+* Hvordan komme i gang.
