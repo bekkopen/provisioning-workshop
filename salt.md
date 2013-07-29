@@ -14,6 +14,6 @@ Configuration:
 
 http://docs.saltstack.com/topics/configuration.html
 
-* Give the minion a master
+* Configure the minion with the IP of the master
 * Accept the minions key on the master ```salt-key -A```
 
