@@ -4,9 +4,9 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>Sammenligning av provisjoneringsrammeverk</title>
+		<title>Comparison of provisioning frameworks</title>
 
-		<meta name="description" content="Sammenligning av provisjoneringsrammeverk og testing med ServerSpec">
+		<meta name="description" content="Comparison of provisioning frameworks and testing with ServerSpec">
 		<meta name="author" content="Stian Mathiassen and Stein Inge Morisbak">
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
@@ -38,14 +38,14 @@
 			<div class="slides">
 
 				<section>
-				<h2>Intro til provisjoneringsrammeverk</h2>
+				<h2>Intro to provisioning frameworks</h2>
 				</section>
 
 				<section>
-				<h2>Hva er provisjoneringsrammeverk?</h2>
+				<h2>What's a provisioning framework?</h2>
 				<ul>
-					<li>Automatisert oppsett av servere</li>
-					<li>Konfigurasjon som kode</li>
+					<li>Automated setup of servers</li>
+					<li>Configuration as code</li>
 				</ul>
 				<aside class="notes">
 
@@ -55,11 +55,11 @@
 				<section>
 				<h2>Eksempler</h2>
 				<ul>
-					<li>Lage brukere</li>
-					<li>Generere configfiler</li>
-					<li>Installere programvare</li>
-					<li>Starte/stoppe/restarte prosesser</li>
-					<li>Sette opp avhengigheter mellom operasjoner</li>
+					<li>Create users</li>
+					<li>Generate config files</li>
+					<li>Install software</li>
+					<li>Start/stop/restart processes</li>
+					<li>Set up dependencies between operations</li>
 				</ul>
 				<aside class="notes">
 
@@ -68,15 +68,15 @@
 				<section>
 				<h2>Pros</h2>
 				<ul>
-					<li>I kildekodekontroll.</li>
-					<li>Likere miljøer.</li>
-					<li>Selvdokumeterende (det er kode!)</li>
+					<li>In source control.</li>
+					<li>Less differences between environments</li>
+					<li>Self documenting (it's code!)</li>
 					<li>Refactoring</li>
-					<li>Repeterbart (no need for manual rollback)</li>
-					<li>Deterministisk</li>
-					<li>Fjerner manuelle steg</li>
-					<li>Raskt å konfigurere opp et nytt miljø</li>
-					<li>Enklere å teste serveroppsett</li>
+					<li>Repeatable (no need for manual rollback)</li>
+					<li>Deterministc</li>
+					<li>Prevents manual steps</li>
+					<li>Fast and easy to configure up a new environment</li>
+					<li>Easier to test server setup</li>
 				</ul>
 				<aside class="notes">
 
@@ -85,18 +85,18 @@
 				<section>
 				<h3>Cons</h3>
 				<ul>
-					<li>Uvant for "klassiske driftere"</li>
-					<li>Uvant med drift for utviklere</li>
-					<li>Oppstartskostnad
+					<li>Unfamiliar to "old school operators"</li>
+					<li>Operations is unfamilar to developers</li>
+					<li>Startup cost
 					<ul>
-						<li>Opplæring</li>
-						<li>Migrering</li>
+						<li>Training</li>
+						<li>Migrating</li>
 					</ul>
 					</li>
-					<li>Krever en del av organisasjonen</li>
+					<li>Depends on organizational structure</li>
 				</ul>
 				<aside class="notes">
-				Organisasjon: kan være silobasert.
+				Organization: could be silos.
 				</aside>
 				</section>
 
@@ -105,13 +105,13 @@
 				<ul>
 					<li>Master/Slave</li>
 					<li>SSH</li>
-					<li>Imperativt versus deklarativt</li>
+					<li>Imperative versus declarative</li>
 				</ul>
 				</section>
 
 				<section>
 				<div style="width: 65%; float: left">
-					<h3>Imperativt</h3>
+					<h3>Imperative</h3>
 					<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
 #!/bin/bash
 
@@ -133,7 +133,7 @@ fi
 					</div>
 
 					<div style="width: 35%; float: right">
-						<h3>Deklarativt</h3>
+						<h3>Deklarative</h3>
 						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
 package { "vim":
   ensure =&gt; present,
