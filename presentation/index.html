@@ -107,6 +107,9 @@
 					<li>SSH</li>
 					<li>Imperative versus declarative</li>
 				</ul>
+				<aside class="notes">
+
+				</aside>
 				</section>
 
 				<section>
@@ -145,6 +148,9 @@ file { "/etc/vim/vimrc":
 					</code></pre>
 						</div>
 						<div style="clear: both"></div>
+						<aside class="notes">
+
+						</aside>
 						</section>
 
 						<section>
@@ -156,9 +162,13 @@ file { "/etc/vim/vimrc":
 								<li>a home directory</li>
 								<li>/bin/bash as the default shell</li>
 							</ul>
-							<li>an init script</li>
-							<li>nginx with a reverse proxy using example configuration</li>
+							<li>An init script</li>
+							<li>Nginx with a reverse proxy using example configuration</li>
+							<li>Deploy an application that uses the provisioned infrastructure</li>
 						</ul>
+						<aside class="notes">
+
+						</aside>
 						</section>
 
 						<section>
@@ -171,6 +181,9 @@ file { "/etc/vim/vimrc":
 							<li><strong>CFEngine</strong>: http://cfengine.com</li>
 						</ul>
 						</section>
+						<aside class="notes">
+
+						</aside>
 
 						<section>
 						<section>
@@ -178,12 +191,18 @@ file { "/etc/vim/vimrc":
 						<ul>
 							<li>Short info...</li>
 						</ul>
+						<aside class="notes">
+
+						</aside>
 						</section>
 						<section>
 						<h2>Example</h2>
 						<ul>
 							<li>A user and a file</li>
 						</ul>
+						<aside class="notes">
+
+						</aside>
 						</section>
 
 						<section>
@@ -191,16 +210,28 @@ file { "/etc/vim/vimrc":
 						<ul>
 							<li></li>
 						</ul>
+						<aside class="notes">
+
+						</aside>
 						</section>
 						<section>
 						<h1>Demo</h1>
+						<aside class="notes">
+
+						</aside>
 						</section>
 						<section>
 						<h2>Pros & Cons</h2>
 						<ul>
 							<li></li>
 						</ul>
+						<aside class="notes">
+
+						</aside>
 						</section>
+						<aside class="notes">
+
+						</aside>
 						</section>
 
 						<section>
@@ -209,12 +240,18 @@ file { "/etc/vim/vimrc":
 						<ul>
 							<li>Short info...</li>
 						</ul>
+						<aside class="notes">
+
+						</aside>
 						</section>
 						<section>
 						<h2>Example code</h2>
 						<ul>
 							<li>A user and a file</li>
 						</ul>
+						<aside class="notes">
+
+						</aside>
 						</section>
 
 						<section>
@@ -222,16 +259,28 @@ file { "/etc/vim/vimrc":
 						<ul>
 							<li></li>
 						</ul>
+						<aside class="notes">
+
+						</aside>
 						</section>
 						<section>
 						<h1>Demo</h1>
+						<aside class="notes">
+
+						</aside>
 						</section>
 						<section>
 						<h2>Pros & Cons</h2>
 						<ul>
 							<li></li>
 						</ul>
+						<aside class="notes">
+
+						</aside>
 						</section>
+						<aside class="notes">
+
+						</aside>
 						</section>
 
 						<section>
@@ -240,12 +289,18 @@ file { "/etc/vim/vimrc":
 						<ul>
 							<li>Short info...</li>
 						</ul>
+						<aside class="notes">
+
+						</aside>
 						</section>
 						<section>
 						<h2>Example code</h2>
 						<ul>
 							<li>A user and a file</li>
 						</ul>
+						<aside class="notes">
+
+						</aside>
 						</section>
 
 						<section>
@@ -253,16 +308,28 @@ file { "/etc/vim/vimrc":
 						<ul>
 							<li></li>
 						</ul>
+						<aside class="notes">
+
+						</aside>
 						</section>
 						<section>
 						<h1>Demo</h1>
+						<aside class="notes">
+
+						</aside>
 						</section>
 						<section>
 						<h2>Pros & Cons</h2>
 						<ul>
 							<li></li>
 						</ul>
+						<aside class="notes">
+
+						</aside>
 						</section>
+						<aside class="notes">
+
+						</aside>
 						</section>
 
 						<section>
@@ -271,12 +338,18 @@ file { "/etc/vim/vimrc":
 						<ul>
 							<li>Short info...</li>
 						</ul>
+						<aside class="notes">
+
+						</aside>
 						</section>
 						<section>
 						<h2>Example code</h2>
 						<ul>
 							<li>A user and a file</li>
 						</ul>
+						<aside class="notes">
+
+						</aside>
 						</section>
 
 						<section>
@@ -284,133 +357,195 @@ file { "/etc/vim/vimrc":
 						<ul>
 							<li></li>
 						</ul>
+						<aside class="notes">
+
+						</aside>
 						</section>
 						<section>
 						<h1>Demo</h1>
+						<aside class="notes">
+
+						</aside>
 						</section>
 						<section>
 						<h2>Pros & Cons</h2>
 						<ul>
 							<li></li>
 						</ul>
+						<aside class="notes">
+
+						</aside>
 						</section>
+						<aside class="notes">
+
+						</aside>
 						</section>
 
 						<section>
 						<section>
 						<h2>CFEngine</h2>
 						<ul>
-							<li>Short info...</li>
+							<li>Knowledge &amp; Promises</li>
 						</ul>
+						<aside class="notes">
+						Promises is the implementation of the provisioning.
+						Knowledge is about documentation. What is the intention with the promises?
+						</aside>
 						</section>
 						<section>
 						<h2>Example code</h2>
-						<ul>
-							<li>A user and a file</li>
-						</ul>
-						</section>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+bundle agent check_user_devops_exists_and_create_if_required {
+	vars:
+	  "userDevops" string =&gt; "devops -d /home/devops -s /bin/bash -m -U";
 
-						<section>
-						<h2>Installation and setup</h2>
-						<ul>
-							<li></li>
-						</ul>
-						</section>
-						<section>
-						<h1>Demo</h1>
-						</section>
-						<section>
-						<h2>Pros & Cons</h2>
-						<ul>
-							<li></li>
-						</ul>
-						</section>
-						</section>
+	classes:
+	  "userDevops" expression =&gt; userexists("devops");
 
-						<section>
-						<h2>Summary</h2>
-						<ul>
-							<li>No order here</li>
-							<li>Or here</li>
-							<li>Or here</li>
-							<li>Or here</li>
-						</ul>
-						</section>
-						<section>
-						<h1>What did we forget?</h1>
-						</section>
-						<section>
-						<h1>To test!</h1>
-						</section>
+	reports:
+	  !userDevops::
+		"User devops doesn't exist. I will attempt to create it.";
 
-						<section>
-						<h2>ServerSpec</h2>
-						<p>
-						With serverspec, you can write RSpec tests for checking your servers are configured correctly.
+	commands:
+	  !userDevops::
+		"/usr/sbin/useradd $(userDevops)";
+}
 
-						Serverspec tests your servers' actual state through SSH access, so you don't need to install any agent softwares on your servers and can use any configuration management tools, Puppet, Chef, CFEngine and so on.
-						</p>
-						</section>
+bundle agent set_the_devops_password {
+        files:
+          "/etc/shadow"
+          depends_on =&gt; { "check_user_devops_exists_and_create_if_required" },
+          comment =&gt; "Set the devops password",
+          edit_line =&gt; set_user_field("devops",2,"devops123");
+}
+							</code></pre>
+							<aside class="notes">
 
-						<section>
-						<h2>What are you waiting for?</h2>
-						<ul>
-							<li>Describe your existing infrastructure with ServerSpec</li>
-							<li>Use Vagrant and VirtualBox to play around in a "real" environment.</li>
-							<li>Use a provisioning framework to make your tests go green</li>
-							<li>Go live!</li>
-						</ul>
+							</aside>
+							</section>
 
-						<aside class="notes">
-						
-						</aside>
-						</section>
+							<section>
+							<h2>Installation and setup</h2>
+							<ul>
+								<li></li>
+							</ul>
+							<aside class="notes">
 
-						<section>
-						<h1>TAKK TIL</h1>
-						<ul>
-							<li>Espen H. Halvorsen, Janniche Haugen<br>og Thomas Arp: <strong>Puppet</strong></li>
-							<li>Fredrik Valdmanis og Sveinung Dalatun: <strong>CFEngine</strong></li>
-							<li>Sveinung Dalatun: <strong>Salt</strong></li>
-							<li>Stian Mathiassen og Magnus Haug: <strong>Ansible</strong></li>
-							<li>Stein Inge Morisbak og Kjetil Ødegaard: <strong>Puppet</strong></li>
-						</ul>
-						</section>
+							</aside>
+							</section>
+							<section>
+							<h1>Demo</h1>
+							<aside class="notes">
+
+							</aside>
+							</section>
+							<section>
+							<h2>Pros & Cons</h2>
+							<ul>
+								<li></li>
+							</ul>
+							<aside class="notes">
+
+							</aside>
+							</section>
+							<aside class="notes">
+
+							</aside>
+							</section>
+
+							<section>
+							<h2>Summary</h2>
+							<ul>
+								<li>No order here</li>
+								<li>Or here</li>
+								<li>Or here</li>
+								<li>Or here</li>
+							</ul>
+							<aside class="notes">
+
+							</aside>
+							</section>
+							<section>
+							<h1>What did we forget?</h1>
+							</section>
+							<section>
+							<h1>To test!</h1>
+							</section>
+
+							<section>
+							<h2>ServerSpec</h2>
+							<p>
+							With serverspec, you can write RSpec tests for checking your servers are configured correctly.
+
+							Serverspec tests your servers' actual state through SSH access, so you don't need to install any agent softwares on your servers and can use any configuration management tools, Puppet, Chef, CFEngine and so on.
+							</p>
+							<aside class="notes">
+
+							</aside>
+							</section>
+
+							<section>
+							<h2>What are you waiting for?</h2>
+							<ul>
+								<li>Describe your existing infrastructure with ServerSpec</li>
+								<li>Use Vagrant and VirtualBox to play around in a "real" environment.</li>
+								<li>Use a provisioning framework to make your tests go green</li>
+								<li>Go live!</li>
+							</ul>
+
+							<aside class="notes">
+
+							</aside>
+							</section>
+
+							<section>
+							<h1>TAKK TIL</h1>
+							<ul>
+								<li>Espen H. Halvorsen, Janniche Haugen<br>og Thomas Arp: <strong>Puppet</strong></li>
+								<li>Fredrik Valdmanis og Sveinung Dalatun: <strong>CFEngine</strong></li>
+								<li>Sveinung Dalatun: <strong>Salt</strong></li>
+								<li>Stian Mathiassen og Magnus Haug: <strong>Ansible</strong></li>
+								<li>Stein Inge Morisbak og Kjetil Ødegaard: <strong>Puppet</strong></li>
+							</ul>
+							<aside class="notes">
+
+							</aside>
+							</section>
+
+						</div>
 
 					</div>
 
-				</div>
+					<script src="lib/js/head.min.js"></script>
+					<script src="js/reveal.min.js"></script>
 
-				<script src="lib/js/head.min.js"></script>
-				<script src="js/reveal.min.js"></script>
+					<script>
 
-				<script>
+						// Full list of configuration options available here:
+						// https://github.com/hakimel/reveal.js#configuration
+						Reveal.initialize({
+							controls: true,
+							progress: true,
+							history: true,
+							center: true,
 
-					// Full list of configuration options available here:
-					// https://github.com/hakimel/reveal.js#configuration
-					Reveal.initialize({
-						controls: true,
-						progress: true,
-						history: true,
-						center: true,
+							theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+							transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
 
-						theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-						transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+							// Optional libraries used to extend on reveal.js
+							dependencies: [
+							{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+							{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+							{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+							{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+							{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+							{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+							// { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+							// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+							]
+						});
 
-						// Optional libraries used to extend on reveal.js
-						dependencies: [
-						{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-						{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-						{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-						{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-						{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-						{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
-						// { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
-						// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
-						]
-					});
+					</script>
 
-				</script>
-
-			</body>
-		</html>
+				</body>
+			</html>

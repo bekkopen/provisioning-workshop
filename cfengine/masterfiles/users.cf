@@ -1,19 +1,3 @@
-bundle agent check_user_steinim_exists_and_create_if_required {
-        vars:
-          "userSteinim" string => "steinim -d /home/steinim -s /bin/bash -m -U";
-
-        classes:
-          "userSteinim" expression => userexists("steinim");
-
-        reports:
-          !userSteinim::
-                "The user steinim does not exist and I will attempt to create it.";
-
-        commands:
-          !userSteinim::
-                "/usr/sbin/useradd $(userSteinim)";
-}
-
 bundle agent check_user_devops_exists_and_create_if_required {
         vars:
           "userDevops" string => "devops -d /home/devops -s /bin/bash -m -U";
@@ -28,4 +12,12 @@ bundle agent check_user_devops_exists_and_create_if_required {
         commands:
           !userDevops::
                 "/usr/sbin/useradd $(userDevops)";
+}
+
+bundle agent set_the_devops_password {
+        files:
+          "/etc/shadow"
+          depends_on => { "check_user_devops_exists_and_create_if_required" },
+          comment => "Set the devops password",
+          edit_line => set_user_field("devops",2,"devops123");
 }
