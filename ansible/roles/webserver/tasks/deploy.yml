@@ -1,0 +1,10 @@
+- name: install java
+  yum: pkg=java-1.6.0-openjdk state=installed
+- name: download jar
+  command: wget https://github.com/bekkopen/provisioning-workshop/raw/master/serverfiler/devops.jar chdir=/home/devops/ creates=/home/devops/devops.jar
+  sudo_user: devops
+  sudo: true
+- name: start java webapp
+  command: ./init.sh start chdir=/home/devops/ creates=/home/devops/devops.pid
+  sudo_user: devops
+  sudo: true
