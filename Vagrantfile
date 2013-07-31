@@ -60,8 +60,8 @@ Vagrant::Config.run do |config|
   # end
   #
   config.vm.box = "provisioning-workshop"
-  #config.vm.box_url = "https://s3-eu-west-1.amazonaws.com/bekk-devops/devops-kurs.box"
-  config.vm.box_url = "http://downfield.os.ergo.no/virtualbox/centos55_64.box"
+  config.vm.box_url = "https://s3-eu-west-1.amazonaws.com/bekk-devops/devops-kurs.box"
+  #config.vm.box_url = "http://downfield.os.ergo.no/virtualbox/centos55_64.box"
 
   config.vm.define :master do |master_config|
   end

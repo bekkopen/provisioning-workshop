@@ -270,9 +270,23 @@ file { "/etc/vim/vimrc":
 						</aside>
 						</section>
 						<section>
-						<h2>Pros & Cons</h2>
+						<h2>Pros</h2>
 						<ul>
-							<li></li>
+							<li>Succinct and readable syntax (YAML based).</li>
+							<li>Supports both push and pull remote execution.</li>
+							<li>Easy to install / low startup costs.</li>
+							<li>Support for various cloud providers (EC2, linode, Rackspace, etc.) with boostrapping for some through Cloud-Init.</li>
+							<li>Much more declarative than other frameworks.</li>
+						</ul>
+						<aside class="notes">
+
+						</aside>
+						</section>
+						<section>
+						<h2>Cons</h2>
+						<ul>
+							<li>Much more declarative than other frameworks. Yes both a pro and con. :)</li>
+							<li>As it uses YAML it is hard to create well-defined interfaces to modules (if the need arises). No concept of parameters to modules as in Puppet. Not a problem for simple infrastructures (i.e. such as that explored by the workshop).</li>
 						</ul>
 						<aside class="notes">
 
@@ -440,9 +454,19 @@ bundle agent set_the_devops_password {
 							</aside>
 							</section>
 							<section>
-							<h2>Pros & Cons</h2>
+							<h2>Pros</h2>
 							<ul>
-								<li></li>
+								<li>Less abstract than i.e. Puppet</li>
+							</ul>
+							<aside class="notes">
+							Writes out the command that is used on the server i.e. when adding a user.
+
+							</aside>
+							</section>
+							<section>
+							<h2>Cons</h2>
+							<ul>
+								<li>Knowledge as comments</li>
 							</ul>
 							<aside class="notes">
 
