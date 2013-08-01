@@ -29,6 +29,6 @@ bundle agent nginx
 
   commands:
     restart_nginx::
-      "/usr/sbin/service nginx restart";
+      "/sbin/service nginx restart";
 }
 

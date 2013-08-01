@@ -1,8 +1,0 @@
-bundle agent app
-{
-files:
-
-  "/home/devops/devops.jar"
-
-    copy_from => secure_cp("$(sys.workdir)/tmp/devops.jar","cfhub");
-}

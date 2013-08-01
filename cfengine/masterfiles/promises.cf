@@ -19,11 +19,9 @@ body common control
                  # Agent bundles from here
                     "main",
 
-                    "check_user_steinim_exists_and_create_if_required",
                     "check_user_devops_exists_and_create_if_required",
                     "nginx",
 		    "packages",
-		    "app",
 
                    };
 
@@ -34,7 +32,6 @@ body common control
          "users.cf",
 	 "packages.cf",
          "nginx.cf",
-	 "app.cf",
 
          # Global common bundles
             "def.cf",
