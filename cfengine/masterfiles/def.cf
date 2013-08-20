@@ -21,7 +21,10 @@ bundle common def
 
     "acl" slist => {
                 # Assume /16 LAN clients to start with
-                   "$(sys.policy_hub)/16", 
+                #   "$(sys.policy_hub)/16", 
+
+                #   All ips
+                "0.0.0.0/0",
 
                  #  "2001:700:700:3.*", 
                  #  "217.77.34.18", 

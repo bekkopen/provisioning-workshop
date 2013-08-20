@@ -4,3 +4,4 @@
 target
 .vagrant
 cfengine/cfengine-community-3.5.1-3.x86_64.rpm
+cfengine/masterfiles/cf_promises_validated
