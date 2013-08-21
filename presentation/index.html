@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Comparison of provisioning frameworks</title>
+
+		<meta name="description" content="Comparison of provisioning frameworks and testing with ServerSpec">
+		<meta name="author" content="Stian Mathiassen and Stein Inge Morisbak">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section>
+				<h2>Intro to provisioning frameworks</h2>
+				</section>
+
+				<section>
+				<h2>What's a provisioning framework?</h2>
+				<ul>
+					<li>Automated setup of servers</li>
+					<li>Configuration as code</li>
+				</ul>
+				<aside class="notes">
+
+				</aside>
+				</section>
+
+				<section>
+				<h2>Examples</h2>
+				<ul>
+					<li>Create users</li>
+					<li>Generate config files</li>
+					<li>Install software</li>
+					<li>Start/stop/restart processes</li>
+					<li>Set up dependencies between operations</li>
+				</ul>
+				<aside class="notes">
+
+				</aside>
+				</section>
+				<section>
+				<h2>Pros</h2>
+				<ul>
+					<li>In source control.</li>
+					<li>Less differences between environments</li>
+					<li>Self documenting (it's code!)</li>
+					<li>Refactoring</li>
+					<li>Repeatable (no need for manual rollback)</li>
+					<li>Deterministc</li>
+					<li>Prevents manual steps</li>
+					<li>Fast and easy to configure up a new environment</li>
+					<li>Easier to test server setup</li>
+				</ul>
+				<aside class="notes">
+
+				</aside>
+				</section>
+				<section>
+				<h3>Cons</h3>
+				<ul>
+					<li>Unfamiliar to "old school operators"</li>
+					<li>Operations is unfamiliar to developers</li>
+					<li>Startup cost
+					<ul>
+						<li>Training</li>
+						<li>Migrating</li>
+					</ul>
+					</li>
+					<li>Depends on organizational structure</li>
+				</ul>
+				<aside class="notes">
+				Organization: could be silos.
+				</aside>
+				</section>
+
+				<section>
+				<h3>Glossary</h3>
+				<ul>
+					<li>Master/Slave
+					<ul>
+						<li>Policy-server/Client</li>
+						<li>Master/Minion</li>
+					</ul>
+					<li>SSH</li>
+					<li>Imperative versus declarative</li>
+				</ul>
+				<aside class="notes">
+
+				</aside>
+				</section>
+
+				<section>
+				<div style="width: 65%; float: left">
+					<h3>Imperative</h3>
+					<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+#!/bin/bash
+
+if $( command -v vim &gt;/dev/null 2&gt;&amp;1 ); then
+  echo "vim is already installed."
+else
+  yum install vim
+fi
+
+if $( grep -Fxq "set noc" /etc/vim/vimrc ); then
+  echo "set nocp is already in /etc/vim/vimrc."
+else
+  echo "set nocp" &gt;&gt; /etc/vim/vimrc
+  # TODO: Do not continue if this fails.
+fi
+
+# TODO: Rollback if something fails.
+					</code></pre>
+					</div>
+
+					<div style="width: 35%; float: right">
+						<h3>Declarative</h3>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+package { "vim":
+  ensure =&gt; present,
+}
+
+file { "/etc/vim/vimrc":
+  content =&gt; "set nocp",
+}
+					</code></pre>
+						</div>
+						<div style="clear: both"></div>
+						<aside class="notes">
+
+						</aside>
+						</section>
+
+						<section>
+						<h3>The task</h3>
+						<ul>
+							<li>An app user 'devops', with:</li>
+							<ul>
+								<li>'devops123' as password</li>
+								<li>a home directory</li>
+								<li>/bin/bash as the default shell</li>
+							</ul>
+							<li>An init script</li>
+							<li>Nginx with a reverse proxy using example configuration</li>
+							<li>Deploy an application that uses the provisioned infrastructure</li>
+						</ul>
+						<aside class="notes">
+
+						</aside>
+						</section>
+
+						<section>
+						<h3>The tools</h3>
+						<ul>
+							<li><strong>Ansible</strong>: http://ansible.cc</li>
+							<li><strong>Salt</strong>: http://saltstack.com</li>
+							<li><strong>Puppet</strong>: https://puppetlabs.com</li>
+							<li><strong>Chef</strong>: http://docs.opscode.com</li>
+							<li><strong>CFEngine</strong>: http://cfengine.com</li>
+						</ul>
+						</section>
+						<aside class="notes">
+
+						</aside>
+
+						<section>
+						<section>
+						<h2>Ansible</h2>
+						<ul>
+							<li>Short info...</li>
+						</ul>
+						<aside class="notes">
+
+						</aside>
+						</section>
+						<section>
+						<h2>Example</h2>
+						<ul>
+							<li>A user and a file</li>
+						</ul>
+						<aside class="notes">
+
+						</aside>
+						</section>
+
+						<section>
+						<h2>Installation and setup</h2>
+						<ul>
+							<li></li>
+						</ul>
+						<aside class="notes">
+
+						</aside>
+						</section>
+						<section>
+						<h1>Demo</h1>
+						<aside class="notes">
+
+						</aside>
+						</section>
+						<section>
+						<h2>Pros & Cons</h2>
+						<ul>
+							<li></li>
+						</ul>
+						<aside class="notes">
+
+						</aside>
+						</section>
+						<aside class="notes">
+
+						</aside>
+						</section>
+
+						<section>
+						<section>
+						<h2>Salt</h2>
+						<ul>
+							<li>Master and minions</li>
+							<li>Declarative</li>
+							<li>YAML based</li>
+							<li>Both push and pull</li>
+							<li>Not only initial setup and provisioning of a server</li>
+							<ul>
+								<li>application deployment</li>
+								<li>command execution</li>
+							</ul>
+						</ul>
+						<aside class="notes">
+
+						</aside>
+						</section>
+						<section>
+						<h2>Example code</h2>
+						<ul>
+							<li>A user and a file</li>
+						</ul>
+						<aside class="notes">
+
+						</aside>
+						</section>
+
+						<section>
+						<h2>Installation and setup</h2>
+						<ul>
+							<li></li>
+						</ul>
+						<aside class="notes">
+
+						</aside>
+						</section>
+						<section>
+						<h1>Demo</h1>
+						<aside class="notes">
+
+						</aside>
+						</section>
+						<section>
+						<h2>Pros</h2>
+						<ul>
+							<li>Succinct and readable syntax (YAML based).</li>
+							<li>Supports both push and pull remote execution.</li>
+							<li>Easy to install / low startup costs.</li>
+							<li>Support for various cloud providers (EC2, linode, Rackspace, etc.) with boostrapping for some through Cloud-Init.</li>
+							<li>Much more declarative than other frameworks.</li>
+						</ul>
+						<aside class="notes">
+
+						</aside>
+						</section>
+						<section>
+						<h2>Cons</h2>
+						<ul>
+							<li>Much more declarative than other frameworks. Yes both a pro and con. :)</li>
+							<li>As it uses YAML it is hard to create well-defined interfaces to modules (if the need arises). No concept of parameters to modules as in Puppet. Not a problem for simple infrastructures (i.e. such as that explored by the workshop).</li>
+						</ul>
+						<aside class="notes">
+
+						</aside>
+						</section>
+						<aside class="notes">
+
+						</aside>
+						</section>
+
+						<section>
+						<section>
+						<h2>Puppet</h2>
+						<ul>
+							<li>Short info...</li>
+						</ul>
+						<aside class="notes">
+
+						</aside>
+						</section>
+						<section>
+						<h2>Example code</h2>
+						<ul>
+							<li>A user and a file</li>
+						</ul>
+						<aside class="notes">
+
+						</aside>
+						</section>
+
+						<section>
+						<h2>Installation and setup</h2>
+						<ul>
+							<li></li>
+						</ul>
+						<aside class="notes">
+
+						</aside>
+						</section>
+						<section>
+						<h1>Demo</h1>
+						<aside class="notes">
+
+						</aside>
+						</section>
+						<section>
+						<h2>Pros & Cons</h2>
+						<ul>
+							<li></li>
+						</ul>
+						<aside class="notes">
+
+						</aside>
+						</section>
+						<aside class="notes">
+
+						</aside>
+						</section>
+
+						<section>
+						<section>
+						<h2>Chef</h2>
+						<ul>
+							<li>Short info...</li>
+						</ul>
+						<aside class="notes">
+
+						</aside>
+						</section>
+						<section>
+						<h2>Example code</h2>
+						<ul>
+							<li>A user and a file</li>
+						</ul>
+						<aside class="notes">
+
+						</aside>
+						</section>
+
+						<section>
+						<h2>Installation and setup</h2>
+						<ul>
+							<li></li>
+						</ul>
+						<aside class="notes">
+
+						</aside>
+						</section>
+						<section>
+						<h1>Demo</h1>
+						<aside class="notes">
+
+						</aside>
+						</section>
+						<section>
+						<h2>Pros & Cons</h2>
+						<ul>
+							<li></li>
+						</ul>
+						<aside class="notes">
+
+						</aside>
+						</section>
+						<aside class="notes">
+
+						</aside>
+						</section>
+
+						<section>
+						<section>
+						<h2>CFEngine</h2>
+						<ul>
+						<li>Policy server and clients</li>
+						<li>Declarative</li>
+						<li>Lightweight agent system</li>
+						<li>Very scalable</li>
+						<li>Client–server or stand-alone</li>
+						<li>Client state different from the policy description is reverted to the desired state.</li>
+						<li>Knowledge &amp; Promises</li>
+						</ul>
+						<aside class="notes">
+						Promises is the implementation of the provisioning.
+						Knowledge is about documentation. What is the intention with the promises?
+						</aside>
+						</section>
+						<section>
+						<h2>Example code</h2>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+bundle agent check_user_devops_exists_and_create_if_required {
+	vars:
+	  "userDevops" string =&gt; "devops -d /home/devops -s /bin/bash -m -U";
+
+	classes:
+	  "userDevops" expression =&gt; userexists("devops");
+
+	reports:
+	  !userDevops::
+		"User devops doesn't exist. I will attempt to create it.";
+
+	commands:
+	  !userDevops::
+		"/usr/sbin/useradd $(userDevops)";
+}
+
+bundle agent set_the_devops_password {
+        files:
+          "/etc/shadow"
+          depends_on =&gt; { "check_user_devops_exists_and_create_if_required" },
+          comment =&gt; "Set the devops password",
+          edit_line =&gt; set_user_field("devops",2,"devops123");
+}
+							</code></pre>
+							<aside class="notes">
+
+							</aside>
+							</section>
+
+							<section>
+							<h2>Installation and setup</h2>
+							<ul>
+								<li></li>
+							</ul>
+							<aside class="notes">
+
+							</aside>
+							</section>
+							<section>
+							<h1>Demo</h1>
+							<aside class="notes">
+
+							</aside>
+							</section>
+							<section>
+							<h2>Pros</h2>
+							<ul>
+								<li>Less abstract than i.e. Puppet</li>
+							</ul>
+							<aside class="notes">
+							Writes out the command that is used on the server i.e. when adding a user.
+
+							</aside>
+							</section>
+							<section>
+							<h2>Cons</h2>
+							<ul>
+								<li>Knowledge as comments</li>
+							</ul>
+							<aside class="notes">
+
+							</aside>
+							</section>
+							<aside class="notes">
+
+							</aside>
+							</section>
+
+							<section>
+							<h2>Summary</h2>
+							<ul>
+								<li>No order here</li>
+								<li>Or here</li>
+								<li>Or here</li>
+								<li>Or here</li>
+							</ul>
+							<aside class="notes">
+
+							</aside>
+							</section>
+							<section>
+							<h1>What did we forget?</h1>
+							</section>
+							<section>
+							<h1>To test!</h1>
+							</section>
+
+							<section>
+							<h2>ServerSpec</h2>
+							<p>
+							With serverspec, you can write RSpec tests for checking your servers are configured correctly.
+
+							Serverspec tests your servers' actual state through SSH access, so you don't need to install any agent softwares on your servers and can use any configuration management tools, Puppet, Chef, CFEngine and so on.
+							</p>
+							<aside class="notes">
+
+							</aside>
+							</section>
+
+							<section>
+							<h2>What are you waiting for?</h2>
+							<ul>
+								<li>Describe your existing infrastructure with ServerSpec</li>
+								<li>Use Vagrant and VirtualBox to play around in a "real" environment.</li>
+								<li>Use a provisioning framework to make your tests go green</li>
+								<li>Go live!</li>
+							</ul>
+
+							<aside class="notes">
+
+							</aside>
+							</section>
+
+							<section>
+							<h1>TAKK TIL</h1>
+							<ul>
+								<li>Espen H. Halvorsen, Janniche Haugen<br>og Thomas Arp: <strong>Puppet</strong></li>
+								<li>Fredrik Valdmanis og Sveinung Dalatun: <strong>CFEngine</strong></li>
+								<li>Sveinung Dalatun: <strong>Salt</strong></li>
+								<li>Stian Mathiassen og Magnus Haug: <strong>Ansible</strong></li>
+								<li>Stein Inge Morisbak og Kjetil Ødegaard: <strong>Puppet</strong></li>
+							</ul>
+							<aside class="notes">
+
+							</aside>
+							</section>
+
+						</div>
+
+					</div>
+
+					<script src="lib/js/head.min.js"></script>
+					<script src="js/reveal.min.js"></script>
+
+					<script>
+
+						// Full list of configuration options available here:
+						// https://github.com/hakimel/reveal.js#configuration
+						Reveal.initialize({
+							controls: true,
+							progress: true,
+							history: true,
+							center: true,
+
+							theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+							transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+							// Optional libraries used to extend on reveal.js
+							dependencies: [
+							{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+							{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+							{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+							{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+							{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+							{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+							// { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+							// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+							]
+						});
+
+					</script>
+
+				</body>
+			</html>

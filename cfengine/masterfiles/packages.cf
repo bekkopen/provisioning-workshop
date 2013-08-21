@@ -1,0 +1,16 @@
+bundle agent packages
+{
+ vars:
+ # Test the simplest case -- leave everything to the yum smart manager
+
+ "match_package" slist => { 
+                          "java-1.7.0-openjdk"
+                          };
+packages:
+
+  "$(match_package)"
+
+     package_policy => "add",
+     package_method => yum;
+
+}

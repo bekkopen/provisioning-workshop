@@ -1,0 +1,42 @@
+###############################################################################
+# This part is for cf-execd
+#
+# These body settings determine the behaviour of cf-execd, including scheduling
+# times and output capture to $(sys.workdir)/outputs and relay via email.
+###############################################################################
+
+body executor control
+
+{
+
+ any::
+
+  splaytime  => "1";
+  mailto     => "root@$(def.domain)";
+  mailfrom   => "root@$(sys.host)\.$(def.domain)";
+  smtpserver => "localhost";
+
+# Default:
+#
+# schedule => { "Min00", "Min05", "Min10", "Min15", "Min20", 
+#               "Min25", "Min30", "Min35", "Min40", "Min45",
+#               "Min50", "Min55" };
+
+schedule => { "Min01", "Min02", "Min03", "Min04", "Min05", 
+               "Min06", "Min07", "Min08", "Min09", "Min10",
+               "Min11", "Min12", "Min13", "Min14", "Min15",
+               "Min16", "Min17", "Min18", "Min19", "Min20",
+               "Min21", "Min22", "Min23", "Min24", "Min25",
+               "Min26", "Min27", "Min28", "Min29", "Min30",
+               "Min31", "Min32", "Min33", "Min34", "Min35",
+               "Min36", "Min37", "Min38", "Min39", "Min40",
+               "Min41", "Min42", "Min43", "Min44", "Min45",
+               "Min46", "Min47", "Min48", "Min49", "Min50",
+               "Min51", "Min52", "Min53", "Min54", "Min55",
+               "Min56", "Min57", "Min58", "Min59", "Min00" };
+
+ !windows::
+
+  exec_command => "$(sys.cf_twin) -f $(sys.workdir)/inputs/update.cf ; $(sys.cf_agent)";
+
+}

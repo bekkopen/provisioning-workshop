@@ -1,0 +1,34 @@
+bundle agent nginx
+{
+  vars:
+    "redirect_server" string =>
+"server {
+    listen 80;
+    server_name _;
+    access_log /var/log/nginx/devops-access.log;
+    location / {
+        proxy_pass http://localhost:1234;
+        proxy_redirect off;
+    }
+}
+";
+
+  files:
+    "/etc/nginx/conf.d/devops.conf"
+    edit_line => insert_lines("$(redirect_server)"),
+    create => "true",
+    classes => if_repaired("restart_nginx");
+
+  packages:
+      "nginx" package_policy => "add",
+          package_method => yum;
+
+  processes:
+      "nginx: master"
+        restart_class => "restart_nginx";
+
+  commands:
+    restart_nginx::
+      "/sbin/service nginx restart";
+}
+

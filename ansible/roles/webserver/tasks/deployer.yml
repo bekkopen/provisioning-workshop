@@ -1,0 +1,6 @@
+- name: create deployment user
+  user: name=devops password=$6$asdljfhasdjkhfka$N5LyeR5WWqWOAz3fGWfXh4YUUK8GMgrsWA0S6JkXaRZBH0p991.j2/UEJZ8y3pkglTpi8.9VOn.9tuca0Pbfp.
+- name: copy init script to server
+  copy: src=init.sh dest=/home/devops/init.sh mode=0755
+  sudo_user: devops
+  sudo: true

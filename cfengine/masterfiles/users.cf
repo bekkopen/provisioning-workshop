@@ -1,0 +1,23 @@
+bundle agent check_user_devops_exists_and_create_if_required {
+        vars:
+          "userDevops" string => "devops -d /home/devops -s /bin/bash -m";
+
+        classes:
+          "userDevops" expression => userexists("devops");
+
+        reports:
+          !userDevops::
+                "The user devops does not exist and I will attempt to create it.";
+
+        commands:
+          !userDevops::
+                "/usr/sbin/useradd $(userDevops)";
+}
+
+bundle agent set_the_devops_password {
+        files:
+          "/etc/shadow"
+          depends_on => { "check_user_devops_exists_and_create_if_required" },
+          comment => "Set the devops password",
+          edit_line => set_user_field("devops",2,"$1$U9TiASOZ$idSqRA.HTcAQkStCfGWGk/");
+}
