@@ -94,6 +94,9 @@
 					</ul>
 					</li>
 					<li>Depends on organizational structure</li>
+					<ul>
+						<li>From Silos to DevOps</li>
+					</ul>
 				</ul>
 				<aside class="notes">
 				Organization: could be silos.
@@ -162,9 +165,9 @@ file { "/etc/vim/vimrc":
 						<ul>
 							<li>An app user 'devops', with:</li>
 							<ul>
-								<li>'devops123' as password</li>
-								<li>a home directory</li>
-								<li>/bin/bash as the default shell</li>
+								<li>Password: 'devops123'</li>
+								<li>Home directory: /home/devops</li>
+								<li>Default shell: /bin/bash</li>
 							</ul>
 							<li>An init script</li>
 							<li>Nginx with a reverse proxy using example configuration</li>
@@ -258,9 +261,13 @@ file { "/etc/vim/vimrc":
 						</section>
 						<section>
 						<h2>Example code</h2>
-						<ul>
-							<li>A user and a file</li>
-						</ul>
+                                                <pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+devops:
+  user.present:
+    - createhome: True
+    - shell: /bin/bash
+    - password: $6$SALTsalt$ZcYv6WOnmaS0V9w4QHCQHYYg0QnFQQHnIdgR.pCh8OySsVXlS0/oWfPx8600uTbMgNKFJMEoLx8YiDGuYt0cH1
+                                                        </code></pre>
 						<aside class="notes">
 
 						</aside>
@@ -268,9 +275,19 @@ file { "/etc/vim/vimrc":
 
 						<section>
 						<h2>Installation and setup</h2>
-						<ul>
-							<li></li>
-						</ul>
+                                                <pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+sudo rpm -Uvh http://ftp.linux.ncsu.edu/pub/epel/6/i386/epel-release-6-8.noarch.rpm
+
+# Master
+sudo yum -y install salt-master
+sudo chkconfig salt-master on
+sudo service salt-master start
+
+# Minion
+sudo yum -y install salt-minion
+sudo chkconfig salt-minion on
+sudo service salt-minion start
+                                                        </code></pre>
 						<aside class="notes">
 
 						</aside>
@@ -458,9 +475,14 @@ bundle agent set_the_devops_password {
 
 							<section>
 							<h2>Installation and setup</h2>
-							<ul>
-								<li></li>
-							</ul>
+                                                <pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+# On both policy server and clients
+
+sudo yum -y install db4 pcre openssl
+sudo rpm -ivh /vagrant/packages/cfengine-community-3.5.1-3.x86_64.rpm
+sudo /var/cfengine/bin/cf-key
+sudo /var/cfengine/bin/cf-agent --bootstrap 10.11.12.13
+                                                        </code></pre>
 							<aside class="notes">
 
 							</aside>
