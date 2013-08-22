@@ -65,6 +65,7 @@ Vagrant::Config.run do |config|
   config.vm.define :master do |master_config|
     master_config.vm.network :hostonly, "10.11.12.15"
     master_config.vm.provision :shell, :path => "scripts/ssh_master.sh"
+    master_config.vm.provision :shell, :path => "scripts/ssh_credentials.sh"
     master_config.vm.provision :shell, :path => "scripts/install_salt.sh"
     master_config.vm.provision :shell, :path => "scripts/install_salt_master.sh"
   end
@@ -73,6 +74,7 @@ Vagrant::Config.run do |config|
     minion_config.vm.network :hostonly, "10.11.12.16"
     minion_config.vm.forward_port 80, 8888
     minion_config.vm.provision :shell, :path => "scripts/ssh_minion.sh"
+    minion_config.vm.provision :shell, :path => "scripts/ssh_credentials.sh"
     minion_config.vm.provision :shell, :path => "scripts/install_salt.sh"
     minion_config.vm.provision :shell, :path => "scripts/install_salt_minion.sh"
   end
