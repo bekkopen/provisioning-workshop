@@ -11,7 +11,7 @@
 #default_include: master.d/*.conf
 
 # The address of the interface to bind to
-interface: 10.11.12.15
+# interface: 10.11.12.15
 
 # The tcp port used by the publisher
 #publish_port: 4505
@@ -239,9 +239,9 @@ interface: 10.11.12.15
 # roots cannot match, otherwise the downloaded files will not be able to be
 # reliably ensured. A base environment is required to house the top file.
 # Example:
-# file_roots:
-#   base:
-#     - /srv/salt/
+ file_roots:
+   base:
+     - /vagrant/
 #   dev:
 #     - /srv/salt/dev/services
 #     - /srv/salt/dev/states
