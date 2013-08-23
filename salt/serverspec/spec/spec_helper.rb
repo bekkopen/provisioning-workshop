@@ -26,6 +26,22 @@ RSpec.configure do |c|
       options = Net::SSH::Config.for(c.host)
       user    = options[:user] || Etc.getlogin
       
+      vagrant_up = `vagrant up minion`
+      config = `vagrant ssh-config minion`
+      if config != ''
+        config.each_line do |line|
+          if match = /HostName (.*)/.match(line)
+            c.host = match[1]
+          elsif  match = /User (.*)/.match(line)
+            user = match[1]
+          elsif match = /IdentityFile (.*)/.match(line)
+            options[:keys] =  [match[1].gsub(/"/,'')]
+          elsif match = /Port (.*)/.match(line)
+            options[:port] = match[1]
+          end
+        end
+      end
+    
       c.ssh   = Net::SSH.start(c.host, user, options)
     end
   end
