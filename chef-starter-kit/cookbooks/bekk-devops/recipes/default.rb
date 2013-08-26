@@ -7,6 +7,9 @@
 # All rights reserved - Do Not Redistribute
 #
 
+include_recipe "java"
+include_recipe "nginx"
+
 user "devops" do
   supports :manage_home => true 
   system true
@@ -16,7 +19,7 @@ user "devops" do
   action :create
 end
 
-cookbook_file "/home/devops/devops.jar"
+cookbook_file "/home/devops/devops.jar" do
   source "devops.jar"
   mode 0755
   action :create
