@@ -19,7 +19,7 @@ Vagrant.configure("2") do |config|
 
   # This can be set to the host name you wish the guest machine to have. Vagrant
   # will automatically execute the configuration necessary to make this happen.
-  config.vm.hostname = "fredva-starter"
+  config.vm.hostname = "devops-chef"
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
