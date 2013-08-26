@@ -65,8 +65,9 @@ Vagrant::Config.run do |config|
   config.vm.define :policy_server do |policy_server_config|
     policy_server_config.vm.network :hostonly, "10.11.12.13"
     policy_server_config.vm.host_name = "policy"
+    policy_server_config.vm.provision :shell, :path => "../common/scripts/timezone.sh"
+    policy_server_config.vm.provision :shell, :path => "../common/scripts/disable_firewall.sh"
     policy_server_config.vm.provision :shell, :path => "scripts/hosts_policy.sh"
-    policy_server_config.vm.provision :shell, :path => "scripts/disable_firewall.sh"
     policy_server_config.vm.provision :shell, :path => "scripts/ssh_policy_server.sh"
     policy_server_config.vm.provision :shell, :path => "scripts/install_cfengine.sh"
     policy_server_config.vm.provision :shell, :path => "scripts/link_masterfiles.sh"
@@ -75,10 +76,11 @@ Vagrant::Config.run do |config|
 
   config.vm.define :client do |client_config|
     client_config.vm.network :hostonly, "10.11.12.14"
-    client_server_config.vm.host_name = "client"
-    client_config.vm.provision :shell, :path => "scripts/hosts_client.sh"
+    client_config.vm.host_name = "client"
     client_config.vm.forward_port 80, 8888
-    client_config.vm.provision :shell, :path => "scripts/disable_firewall.sh"
+    client_config.vm.provision :shell, :path => "../common/scripts/timezone.sh"
+    client_config.vm.provision :shell, :path => "../common/scripts/disable_firewall.sh"
+    client_config.vm.provision :shell, :path => "scripts/hosts_client.sh"
     client_config.vm.provision :shell, :path => "scripts/ssh_client.sh"
     client_config.vm.provision :shell, :path => "scripts/install_cfengine.sh"
     client_config.vm.provision :shell, :path => "scripts/start-agent.sh"
