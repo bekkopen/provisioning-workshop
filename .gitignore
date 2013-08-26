@@ -6,3 +6,4 @@ getting_started_cfengine_enterprise_3.5_vagrant_virtualbox
 .chef
 *.pem
 knife.rb
+.vagrant
