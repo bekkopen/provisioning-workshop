@@ -1,0 +1,16 @@
+{
+  "chef": {
+    "chef_server_url": "https://api.opscode.com/organizations/bekk-devops",
+    "validation_client_name": "bekk-devops-validator",
+    "validation_key_path": ".chef/bekk-devops-validator.pem",
+    "client_key": ".chef/fredva.pem",
+    "node_name": "fredva"
+  },
+  "vagrant": {
+    "vm": {
+      "box": "opscode-ubuntu-12.04-i386",
+      "box_url": "https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04-i386_provisionerless.box",
+      "provision": "chef_client"
+    }
+  }
+}
