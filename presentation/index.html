@@ -259,6 +259,7 @@ $ sudo pip install ansible
 							<li>Not package-manager-agnostic</li>
 							<li>Less abstraction</li>
 							<li>Scalability</li>
+							<li>Small user base</li>
 						</ul>
 						<aside class="notes">
 						</aside>
@@ -400,67 +401,130 @@ sudo yum install puppet
 
 						</aside>
 						</section>
+
 						<section>
-						<h2>Pros & Cons</h2>
+						<h2>Pros</h2>
 						<ul>
-							<li></li>
+							<li>Powerfull abstractions</li>
+							<li>Good module-system</li>
+							<li>Large user base</li>
+							<li>(Web-console, requires license)</li>
 						</ul>
 						<aside class="notes">
-
 						</aside>
 						</section>
-						<aside class="notes">
 
+						<section>
+						<h2>Cons</h2>
+						<ul>
+							<li>No workstation client</li>
+							<li>No integrated managament of config-files</li>
+						</ul>
+						<aside class="notes">
 						</aside>
+						</section>
+
 						</section>
 
 						<section>
 						<section>
 						<h2>Chef</h2>
 						<ul>
-							<li>Short info...</li>
+							<li>Master/slave or solo</li>
+							<li>Self-hosted server or cloud</li>
+							<li>Declarative</li>
+							<li>Ruby as configuration</li>
+							<li>Workstation client (knife)</li>
 						</ul>
 						<aside class="notes">
-
 						</aside>
 						</section>
 						<section>
 						<h2>Example code</h2>
-						<ul>
-							<li>A user and a file</li>
-						</ul>
+						<pre><code data-trim contenteditable>
+user "devops" do
+  supports :manage_home => true
+  system true
+  home "/home/devops"
+  shell "/bin/bash"
+  password "$1$cgoRmMec$Ge8EgZkjjwvKfOkcOAn7a1"
+  action :create
+end
+						</code></pre>
 						<aside class="notes">
-
 						</aside>
 						</section>
 
 						<section>
 						<h2>Installation and setup</h2>
-						<ul>
-							<li></li>
-						</ul>
-						<aside class="notes">
+						<pre><code data-trim contenteditable>
+# Server setup
+wget "https://opscode-omnibus-packages.s3.amazonaws.com/el/6/x86_64/chef-server-11.0.8-1.el6.x86_64.rpm"
+sudo yum localinstall ./chef-server-11.0.8-1.el6.x86_64.rpm
+sudo chef-server-ctl reconfigure
 
+# Client setup
+% knife configure -i
+WARNING: No knife configuration file found
+Where should I put the config file? [/home/jtimberman/.chef/knife.rb]
+Please enter the chef server URL: [http://chef.example.com:4000] https://chef.example.com
+Please enter a name for the new user: [jtimberman]
+Please enter the existing admin name: [admin]
+Please enter the location of the existing admins private key: [/etc/chef/admin.pem] .chef/admin.pem
+Please enter the validation clientname: [chef-validator]
+Please enter the location of the validation key: [/etc/chef/validation.pem] .chef/chef-validator.pem
+Please enter the path to a chef repository (or leave blank):
+Creating initial API user...
+Please enter a password for the new user:
+Created user[jtimberman]
+Configuration file written to /home/jtimberman/.chef/knife.rb
+						</code></pre>
+						<aside class="notes">
 						</aside>
 						</section>
+
+						<section>
+						<h2>Installation and setup</h2>
+						<pre><code data-trim contenteditable>
+# Add node
+knife bootstrap localhost --ssh-user vagrant --ssh-password vagrant \
+  --ssh-port 2222 --run-list "recipe[bekk-devops],recipe[apt],recipe[java],recipe[nginx]"\
+  --sudo
+						</code></pre>
+						<aside class="notes">
+						</aside>
+						</section>
+
 						<section>
 						<h1>Demo</h1>
 						<aside class="notes">
-
 						</aside>
 						</section>
+
 						<section>
-						<h2>Pros & Cons</h2>
+						<h2>Pros</h2>
 						<ul>
-							<li></li>
+							<li>Scales really well</li>
+							<li>Designed for large scale use</li>
+							<li>Ruby configuration files (if you know Ruby)</li>
+							<li>Lot of existing recipies/cookbooks</li>
+							<li>Workstation client</li>
 						</ul>
 						<aside class="notes">
-
 						</aside>
 						</section>
-						<aside class="notes">
 
+						<section>
+						<h2>Cons</h2>
+						<ul>
+							<li>Hard installation process</li>
+							<li>A lot of concepts / high start-up cost</li>
+							<li>Ruby configuration files (too powerfull)</li>
+						</ul>
+						<aside class="notes">
 						</aside>
+						</section>
+
 						</section>
 
 						<section>
