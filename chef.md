@@ -1,5 +1,5 @@
 Oppsummering
-=============
+------------
 
 * Chef bruker en server-klient modell, men finnes også i en "Chef Solo"-utgave. Man kan sette opp Chef serveren selv, eller la Opscode hoste serveren via produktet Enterprise Chef.
 
@@ -20,7 +20,7 @@ Oppsummering
 * Man installerer cookbooks i lokalt repo med `knife cookbook site install -b <branch>`. Dette laster ned cookbooken fra Opscode Community i en egen "chef-vendor-<cookbook>" branch og merger den inn i <branch>. Du kan gjøre endringer i cookbooken selv, committe til eget repo og laste opp til egen Chef server. Din tilpassede versjon av cookbooken er da den som installeres på nodene som bruker den. For å hente ned upstream endringer i cookbooken kan man oppdatere chef-vendor-branchen og merge endringene inn i master.
 
 For å kjøre eksempelet
-======================
+----------------------
 
 * Installer Chef på egen maskin som beskrevet her: https://learnchef.opscode.com/quickstart/workstation-setup/
 
@@ -31,11 +31,11 @@ For å kjøre eksempelet
 
 * `vagrant up`
 
-* `knife bootstrap localhost \ 
-              --ssh-user vagrant \
-              --ssh-password vagrant \
-              --ssh-port 2222 \
-              --run-list "recipe[bekk-devops],recipe[apt],recipe[java],recipe[nginx]" \
-              --sudo`
+* `knife bootstrap localhost \` 
+              `--ssh-user vagrant \`
+              `--ssh-password vagrant \`
+              `--ssh-port 2222 \`
+              `--run-list "recipe[bekk-devops],recipe[apt],recipe[java],recipe[nginx]" \`
+              `--sudo`
 
 * Det er mulig du må kjøre `knife node delete devops-chef` for å fjerne noden fra serveren hvis den allerede er registrert fra noen andres kjøring.  
