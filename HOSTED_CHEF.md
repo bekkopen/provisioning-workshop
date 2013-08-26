@@ -28,3 +28,8 @@ Oppsummering:
 * Knife bootstrap laster ned Chef-klient på noden og kjører all magi for å provisjonere opp noden.
 
 * Senere runs kan initieres med knife bootstrap eller ved å kjøre "chef-client" på noden.
+
+* Endringer i hva en node skal ha kan entes gjøres ved "knife bootstrap --run_list ..." eller "knife node run_list add [cookbook]" + chef-client run på noden
+
+* "knife cookbook site install -b <branch>" vil laste ned en cookbook fra Chef community i en egen chef-vendor-<cookbook> branch og merge inn i <branch>. 
+  Du kan gjøre endringer i cookbooken selv og commite til eget repo, og så merge inn endringer fra vendor-branchen når du måtte ønske.
