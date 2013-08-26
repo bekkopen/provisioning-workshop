@@ -1,11 +1,10 @@
 server {
-  listen   80;
-  server_name  <%= node['hostname'] %>;
+    listen 80;
+    server_name _;
+    access_log /var/log/nginx/devops-access.log;
 
-  access_log  <%= node['nginx']['log_dir'] %>/localhost.access.log;
-
-  location / {
-    root   /var/www/nginx-default;
-    index  index.html index.htm;
-  }
+    location / {
+        proxy_pass http://localhost:1234;
+        proxy_redirect off;
+    }
 }
