@@ -1,35 +1,34 @@
-1. Installer Chef på egen maskin 
-
-2. Registrer gratis Hosted Chef-konto hos Opscode. 
-
-3. Opprett organisasjon hos Opscode
-
-4. Last ned private keys for både organisasjonen og deg selv, samt knife config og legg inn i prosjekt-repoet ditt
-
-5. Sjekk at oppsettet funker med ```knife client list``` 
-
-6. Legg inn noen pakker med ```knife cookbook site install [package_name]```
-
-7. Last opp cookbooksene til Chef Server med ```knife cookbook upload -a```
-
-8. Bootstrap en node med ```knife bootstrap```
-
-
 Oppsummering:
 
-* Server-klient modell. Kan sette opp Chef server selv, eller la Opscode hoste serveren via produktet Hosted chef
+* Server-klient modell. Man kan sette opp Chef server selv, eller la Opscode hoste serveren via produktet Enterprise Chef.
 
-* Sette opp cookbooks og recipes i repo på utviklermaskin
+* Man setter opp cookbooks og recipes i repo på utviklermaskin ("Workstation" i Chef-lingo). 
 
-* Laster opp cookbooks til Chef server vha. verktøyet Knife
+* Man laster opp cookbooks til Chef server vha. verktøyet knife. 
 
-* Bruker knife for å bootstrappe en node. Kjører kommando med hostnavn, passord og "run-list" som angir hvilke cookbooks som skal kjøres på noden
+* Man bruker knife for å bootstrappe en node. Kjører kommando med hostnavn, passord og "run-list" som angir hvilke cookbooks som skal installeres på noden.
 
-* Knife bootstrap laster ned Chef-klient på noden og kjører all magi for å provisjonere opp noden.
+* `knife bootstrap` laster ned `chef-client` på noden, henter ned cookbooks og nodens run-list fra Chef-serveren og provisjonerer opp noden.
 
-* Senere runs kan initieres med knife bootstrap eller ved å kjøre "chef-client" på noden.
+* Senere runs initieres ved å kjøre "chef-client" på noden, enten ved å manuell SSH til noden eller via Knife.
 
-* Endringer i hva en node skal ha kan entes gjøres ved "knife bootstrap --run_list ..." eller "knife node run_list add [cookbook]" + chef-client run på noden
+* Endringer i cookbooks gjøres ved å endre lokalt, commite til repo og laste opp cookbooken til Chef server vha. Knife. `chef-client` kjøres for å synkronisere cookbooken til noden og utføre eventuelle endringer. 
 
-* "knife cookbook site install -b <branch>" vil laste ned en cookbook fra Chef community i en egen chef-vendor-<cookbook> branch og merge inn i <branch>. 
-  Du kan gjøre endringer i cookbooken selv og commite til eget repo, og så merge inn endringer fra vendor-branchen når du måtte ønske.
+* Endringer i en nodes run list, altså hvilke recipes som skal kjøres på noden, gjøres med "knife node run_list add/remove [cookbook]", eller via Enterprise Chef management konsollet på web. 
+
+* Man installerer cookbooks i lokalt repo med "knife cookbook site install -b <branch>". Dette laster ned cookbooken fra Opscode Community i en egen chef-vendor-<cookbook> branch og merger den inn i <branch>. Du kan gjøre endringer i cookbooken selv, committe til eget repo og laste opp til egen Chef server. Din tilpassede versjon av cookbooken er da den som installeres på nodene som bruker den. For å hente ned upstream endringer i cookbooken kan man oppdatere chef-vendor-branchen og merge endringene inn i master.
+
+For å kjøre eksempelet:
+
+* Installer Chef på egen maskin som beskrevet her: https://learnchef.opscode.com/quickstart/workstation-setup/
+
+* Logg inn på https://manage.opscode.com/organizations, og last ned knife config. Gå på https://www.opscode.com/account/password og last ned key (.pem-fil).
+  Legg .pem-fila og knife.rb inn i chef/.chef
+
+* `cd chef`
+
+* `vagrant up`
+
+* `knife bootstrap localhost --ssh-user vagrant --ssh-password vagrant --ssh-port 2222 --run-list "recipe[bekk-devops],recipe[apt],recipe[java],recipe[nginx]" --sudo`
+
+* Det er mulig du må kjøre `knife node delete devops-chef` for å fjerne noden fra serveren hvis den allerede er registrert fra noen andres kjøring.  
