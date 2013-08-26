@@ -16,14 +16,22 @@ user "devops" do
   action :create
 end
 
-#cookbook_file "/tmp/devops" do
-#  source "devops"
-#  mode 0755
-#end
+cookbook_file "/home/devops/devops.jar"
+  source "devops.jar"
+  mode 0755
+  action :create
+end
 
-#execute "run-devops-init-script" do
-#  command "sh /tmp/devops"
-#end
+
+cookbook_file "/tmp/devops" do
+  source "devops"
+  mode 0755
+  action :create
+end
+
+execute "run-devops-init-script" do
+  command "sh /tmp/devops"
+end
 
 
 
