@@ -13,3 +13,8 @@
 - hosts: puppet
   roles:
   - puppet
+
+- hosts: chef
+  tasks:
+  - name: Set real hostname
+    command: hostname $inventory_hostname
