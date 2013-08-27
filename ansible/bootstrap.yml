@@ -1,0 +1,15 @@
+- hosts:
+  - ansible
+  - puppet
+  - chef
+  tasks:
+  - name: Create .ssh dir for root
+    file: path=/root/.ssh state=directory
+  - name: Copy key to server
+    copy: src=~/.ssh/id_rsa.pub dest=/root/.ssh/authorized_keys mode=0644
+  - name: Warm up yum
+    yum: name=vim state=present
+
+- hosts: puppet
+  roles:
+  - puppet

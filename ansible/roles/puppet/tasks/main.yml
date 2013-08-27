@@ -1,0 +1,28 @@
+- name: Add puppet repo
+  yum: name=http://yum.puppetlabs.com/el/6/products/i386/puppetlabs-release-6-7.noarch.rpm state=present
+- name: Install puppet master
+  yum: name=puppet-server state=present
+- name: Install puppet agent
+  yum: name=puppet state=present
+- name: Copy manifests files
+  local_action: >
+                command 
+                rsync 
+                -e 'ssh -o stricthostkeychecking=no -o userknownhostsfile=/dev/null -o batchmode=yes -o passwordauthentication=no' 
+                -avz
+                ../puppet/manifests/
+                $ansible_user_id@$inventory_hostname:/etc/puppet/manifests/
+- name: Copy module files
+  local_action: >
+                command 
+                rsync 
+                -e 'ssh -o stricthostkeychecking=no -o userknownhostsfile=/dev/null -o batchmode=yes -o passwordauthentication=no' 
+                -avz
+                ../puppet/modules/
+                $ansible_user_id@$inventory_hostname:/etc/puppet/modules/
+- name: Set correct hostname
+  command: /bin/hostname $inventory_hostname
+- name: Set correct puppet master
+  copy: src=puppet dest=/etc/sysconfig/puppet
+- name: Start the puppet master
+  service: name=puppetmaster state=running

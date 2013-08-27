@@ -1,6 +1,0 @@
-- hosts: [ansible, puppet, chef]
-  tasks:
-  - name: Create .ssh dir for root
-    file: path=/root/.ssh state=directory
-  - name: test
-    copy: src=~/.ssh/id_rsa.pub dest=/root/.ssh/authorized_keys mode=0644

@@ -35,6 +35,7 @@ class httpserver {
 
 	exec { 
 		'/etc/init.d/devops start':
+    require => File['/home/devops/devops.jar'],
 	}
 
 	file { '/etc/yum.repos.d/nginx.repo':
@@ -44,23 +45,26 @@ name=nginx repo
 baseurl=http://nginx.org/packages/centos/6/$basearch/
 gpgcheck=0
 enabled=1',
-	notify => Package[nginx],
 	}
 
 	package { 'nginx' :
-		ensure => present,
-		notify => Service[nginx],
+		ensure  => present,
+		require => File['/etc/yum.repos.d/nginx.repo'],
+		notify  => Service[nginx],
 	}
 
 	file { '/etc/nginx/conf.d/devops.conf':
-	  ensure => present,
-	  source => 'puppet:///modules/devops/devops.conf',
-	  notify => Service[nginx],
+	  ensure  => present,
+	  source  => 'puppet:///modules/devops/devops.conf',
+    require => Package[nginx],
+	  notify  => Service[nginx],
 	}
 
 	file { '/etc/nginx/conf.d/default.conf':
-	  ensure => absent,
-	  notify => Service[nginx],
+	  ensure  => absent,
+    require => Package[nginx],
+	  notify  => Service[nginx],
+    backup  => false,
 	}
 
 	service { 'nginx' :
