@@ -38,4 +38,5 @@ elif [ "${minion}" == ${host} ]; then
   ssh root@${host} "rm /etc/nginx/conf.d/devops.conf"
 else
   echo "Illegal host: ${host}. Should be ${master} or ${minion}."
+  exit 1
 fi

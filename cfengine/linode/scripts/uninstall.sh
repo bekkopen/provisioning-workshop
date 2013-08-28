@@ -18,14 +18,21 @@ done
 cd ${BASEDIR}
 cd ..
 
-ssh root@${host} "service cfengine3 stop"
-ssh root@${host} "chkconfig --del cfengine3"
-ssh root@${host} "rpm -qa | grep -i cfengine-community | xargs rpm -e"
-ssh root@${host} "rm -Rf /var/cfengine /etc/init.d/cfengine3"
-ssh root@${host} "service nginx stop"
-ssh root@${host} "chkconfig --del nginx"
-ssh root@${host} "yum -y remove nginx"
-ssh root@${host} "userdel devops"
-ssh root@${host} "userdel nginx"
-ssh root@${host} "rm /etc/init.d/devops"
-ssh root@${host} "rm /etc/nginx/conf.d/devops.conf"
+policyserver="policyserver.devops.smat.cc"
+client="cfengine.devops.smat.cc"
+
+if [ "${policyserver}" == "${host}" ] || [ "${client}" == "${host}" ]; then
+  ssh root@${host} "service nginx stop"
+  ssh root@${host} "chkconfig --del nginx"
+  ssh root@${host} "yum -y remove nginx"
+  ssh root@${host} "userdel devops"
+  ssh root@${host} "userdel nginx"
+  ssh root@${host} "rm /etc/init.d/devops"
+  ssh root@${host} "rm /etc/nginx/conf.d/devops.conf"
+  ssh root@${host} "service cfengine3 stop"
+  ssh root@${host} "chkconfig --del cfengine3"
+  ssh root@${host} "rpm -qa | grep -i cfengine-community | xargs rpm -e"
+  ssh root@${host} "rm -Rf /var/cfengine /etc/init.d/cfengine3"
+else
+  echo "Illegal host: ${host}. Should be ${policyserver} or ${client}."
+fi

@@ -18,19 +18,25 @@ done
 cd ${BASEDIR}
 cd ..
 
-rsync -p -g -o -r -a -v -z -e "ssh -l root" .. root@${host}:
+master="master.devops.smat.cc"
+client="salt.devops.smat.cc"
 
-deployers_key=$(cat ~/.ssh/id_rsa.pub)
-ssh root@${host} "chown -R root:root ./ && mkdir -p .ssh && linode/scripts/ssh_keys.sh ${deployers_key} && linode/scripts/ssh_credentials.sh"
-[ "salt.devops.smat.cc" == "${host}" ] && ssh root@${host} "cp ssh/minion/id_rsa* .ssh/"
-[ "master.devops.smat.cc" == "${host}" ] && ssh root@${host} "cp ssh/master/id_rsa* .ssh/"
-ssh root@${host} "hostname ${host} && echo \"hostname set to ${host}\""
-ssh root@${host} linode/scripts/hosts.sh
-ssh root@${host} linode/scripts/timezone.sh
-ssh root@${host} linode/scripts/disable_firewall.sh
-ssh root@${host} linode/scripts/install_salt.sh
-[ "salt.devops.smat.cc" == "${host}" ] && ssh root@${host} "linode/scripts/install_salt_minion.sh"
-[ "master.devops.smat.cc" == "${host}" ] && ssh root@${host} "linode/scripts/install_salt_master.sh"
-#ssh root@${host} linode/scripts/ssh_test.sh
-exit
+if [ "${master}" == "${host}" ] || [ "${client}" == "${host}" ]; then
+
+  rsync -p -g -o -r -a -v -z -e "ssh -l root" .. root@${host}:
+
+  deployers_key=$(cat ~/.ssh/id_rsa.pub)
+  ssh root@${host} "chown -R root:root ./ && mkdir -p .ssh && linode/scripts/ssh_keys.sh ${deployers_key} && linode/scripts/ssh_credentials.sh"
+  ssh root@${host} "cp linode/ssh/id_rsa* .ssh/"
+  ssh root@${host} "hostname ${host} && echo \"hostname set to ${host}\""
+  ssh root@${host} linode/scripts/hosts.sh
+  ssh root@${host} linode/scripts/timezone.sh
+  ssh root@${host} linode/scripts/disable_firewall.sh
+  ssh root@${host} linode/scripts/install_salt.sh
+  [ "${client}" == "${host}" ] && ssh root@${host} "linode/scripts/install_salt_minion.sh"
+  [ "${master}" == "${host}" ] && ssh root@${host} "linode/scripts/install_salt_master.sh"
+  #ssh root@${host} linode/scripts/ssh_test.sh
+else
+  echo "Illegal host: ${host}. Should be ${master} or ${client}." && exit 1
+fi
 
