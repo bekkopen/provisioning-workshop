@@ -1,5 +1,5 @@
 #!/bin/sh
-
+# chkconfig: 345 20 80
 
 # Alle filer ligger under hjemmekatalog for å gjøre det enklere i starten :)
 PID_FILE=/var/run/devops.pid
@@ -37,7 +37,17 @@ case "$1" in
     $0 stop
     $0 start
     ;;
+  status)
+    PID=`cat ${PID_FILE}`
+    kill -0 ${PID} >/dev/null 2>&1
+    if [ "$?" = "0" ]
+    then
+      echo "devops (pid ${PID}) is running"
+    else
+      echo "devops is not running"
+    fi
+    ;;
   *)
-    echo "Usage: $0 {start|stop|restart}"
+    echo "Usage: $0 {start|stop|restart|status}"
     ;;
 esac

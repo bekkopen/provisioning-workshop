@@ -1,0 +1,20 @@
+bundle agent install_and_start_devops_app
+{
+
+files:
+    "/home/devops/devops.jar"
+    copy_from => local_cp("$(sys.workdir)/inputs/files/devops.jar");
+
+  files:
+    "/etc/init.d/devops"
+    copy_from => local_cp("$(sys.workdir)/inputs/files/devops");
+
+  classes:
+      "devops_jar_is_present" expression => fileexists("/home/devops/devops.jar");
+
+  commands:
+    devops_jar_is_present::
+      "/etc/init.d/devops restart";
+
+}
+

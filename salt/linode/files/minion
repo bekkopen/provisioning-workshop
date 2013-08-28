@@ -10,6 +10,11 @@
 # resolved, then the minion will fail to start.
 master: 151.236.216.254
 
+schedule:
+  highstate:
+    function: state.highstate
+    seconds: 10
+
 # Set the number of seconds to wait before attempting to resolve
 # the master hostname if name resolution fails. Defaults to 30 seconds.
 # Set to zero if the minion should shutdown and not retry.

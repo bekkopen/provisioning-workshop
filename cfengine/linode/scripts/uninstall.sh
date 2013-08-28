@@ -21,12 +21,20 @@ cd ..
 policyserver="policyserver.devops.smat.cc"
 client="cfengine.devops.smat.cc"
 
+if [ "policyserver" == "${host}" ]; then
+  host=${policyserver}
+elif [ "cfengine" == "${host}" ]; then
+  host=${client}
+elif [ "client" == "${host}" ]; then
+  host=${client}
+fi
+
 if [ "${policyserver}" == "${host}" ] || [ "${client}" == "${host}" ]; then
   ssh root@${host} "service nginx stop"
   ssh root@${host} "chkconfig --del nginx"
   ssh root@${host} "yum -y remove nginx"
-  ssh root@${host} "userdel devops"
-  ssh root@${host} "userdel nginx"
+  ssh root@${host} "userdel -r devops"
+  ssh root@${host} "userdel -r nginx"
   ssh root@${host} "rm /etc/init.d/devops"
   ssh root@${host} "rm /etc/nginx/conf.d/devops.conf"
   ssh root@${host} "service cfengine3 stop"

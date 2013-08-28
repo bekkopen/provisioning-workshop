@@ -21,6 +21,14 @@ cd ..
 master="master.devops.smat.cc"
 minion="salt.devops.smat.cc"
 
+if [ "master" == "${host}" ]; then
+  host=${master}
+elif [ "salt" == "${host}" ]; then
+  host=${minion}
+elif [ "minion" == "${host}" ]; then
+  host=${minion}
+fi
+
 if [ "${master}" == ${host} ]; then
   ssh root@${host} "service salt-master stop"
   ssh root@${host} "chkconfig --del salt-master"
