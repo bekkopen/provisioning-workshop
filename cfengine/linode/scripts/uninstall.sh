@@ -1,0 +1,31 @@
+#/bin/bash
+
+if [ $# -ne 1 ]; then
+  echo "Usage: $0 <hostname>"
+  exit 1
+fi
+
+host=${1}
+
+BASEDIR=$(cd -P -- "$(dirname -- "$0")" && pwd -P)
+
+# resolve symlinks
+while [ -h "$BASEDIR/$0" ]; do
+    DIR=$(dirname -- "$BASEDIR/$0")
+    SYM=$(readlink $BASEDIR/$0)
+    BASEDIR=$(cd $DIR && cd $(dirname -- "$SYM") && pwd)
+done
+cd ${BASEDIR}
+cd ..
+
+ssh root@${host} "service cfengine3 stop"
+ssh root@${host} "chkconfig --del cfengine3"
+ssh root@${host} "rpm -qa | grep -i cfengine-community | xargs rpm -e"
+ssh root@${host} "rm -Rf /var/cfengine /etc/init.d/cfengine3"
+ssh root@${host} "service nginx stop"
+ssh root@${host} "chkconfig --del nginx"
+ssh root@${host} "yum -y remove nginx"
+ssh root@${host} "userdel devops"
+ssh root@${host} "userdel nginx"
+ssh root@${host} "rm /etc/init.d/devops"
+ssh root@${host} "rm /etc/nginx/conf.d/devops.conf"

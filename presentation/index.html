@@ -68,48 +68,48 @@
 				<section>
 				<h2>Pros</h2>
 				<ul>
-					<li>In source control.</li>
-					<li>Less differences between environments</li>
-					<li>Self documenting (it's code!)</li>
-					<li>Refactoring</li>
-					<li>Repeatable (no need for manual rollback)</li>
-					<li>Deterministc</li>
-					<li>Prevents manual steps</li>
-					<li>Fast and easy to configure up a new environment</li>
-					<li>Easier to test server setup</li>
+					<li class="fragment">In source control.</li>
+					<li class="fragment">Less differences between environments</li>
+					<li class="fragment">Self documenting (it's code!)</li>
+					<li class="fragment">Refactoring</li>
+					<li class="fragment">Deterministic</li>
+					<li class="fragment">Prevents manual steps</li>
+					<li class="fragment">Fast and easy to configure up a new environment</li>
+					<li class="fragment">Easier to test server setup</li>
 				</ul>
 				<aside class="notes">
 
 				</aside>
 				</section>
 				<section>
-				<h3>Cons</h3>
+				<h2>Cons</h2>
 				<ul>
-					<li>Unfamiliar to "old school operators"</li>
-					<li>Operations is unfamiliar to developers</li>
-					<li>Startup cost
+					<li class="fragment">Unfamiliar to "old school operators"</li>
+					<li class="fragment">Operations is unfamiliar to developers</li>
+					<li class="fragment">Depends on organizational structure
+					<ul>
+						<li>From Silos to DevOps</li>
+					</ul>
+					<li class="fragment">Startup cost
 					<ul>
 						<li>Training</li>
 						<li>Migrating</li>
 					</ul>
+
 					</li>
-					<li>Depends on organizational structure</li>
-					<ul>
-						<li>From Silos to DevOps</li>
-					</ul>
 				</ul>
 				<aside class="notes">
-				Organization: could be silos.
 				</aside>
 				</section>
 
 				<section>
-				<h3>Glossary</h3>
+				<h2>Glossary</h2>
 				<ul>
 					<li>Master/Slave
 					<ul>
 						<li>Policy-server/Client</li>
 						<li>Master/Minion</li>
+						<li>Puppetmaster/Agent</li>
 					</ul>
 					<li>SSH</li>
 					<li>Imperative versus declarative</li>
@@ -121,7 +121,7 @@
 
 				<section>
 				<div style="width: 65%; float: left">
-					<h3>Imperative</h3>
+					<h2>Imperative</h2>
 					<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
 #!/bin/bash
 
@@ -143,7 +143,7 @@ fi
 					</div>
 
 					<div style="width: 35%; float: right">
-						<h3>Declarative</h3>
+						<h2>Declarative</h2>
 						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
 package { "vim":
   ensure =&gt; present,
@@ -161,7 +161,7 @@ file { "/etc/vim/vimrc":
 						</section>
 
 						<section>
-						<h3>The task</h3>
+						<h2>The task</h2>
 						<ul>
 							<li>An app user 'devops', with:</li>
 							<ul>
@@ -179,7 +179,7 @@ file { "/etc/vim/vimrc":
 						</section>
 
 						<section>
-						<h3>The tools</h3>
+						<h2>The tools</h2>
 						<ul>
 							<li><strong>Ansible</strong>: http://ansible.cc</li>
 							<li><strong>Salt</strong>: http://saltstack.com</li>
@@ -197,8 +197,7 @@ file { "/etc/vim/vimrc":
 						<h2>Ansible</h2>
 						<ul>
 							<li>SSH-based</li>
-							<li>Both declerative and imperative</li>
-							<li>Client only</li>
+							<li>Client only (no server)</li>
 							<li>YAML configuration</li>
 							<li>Push</li>
 							<li>Supports more than setup and provisioning:</li>
@@ -222,7 +221,7 @@ file { "/etc/vim/vimrc":
 						</aside>
 						</section>
 
-						<section>
+<!--						<section>
 						<h2>Installation and setup</h2>
 						<pre><code data-trim contenteditable>
 $ sudo easy_install pip
@@ -230,7 +229,7 @@ $ sudo pip install ansible
 						</pre></code>
 						<aside class="notes">
 						</aside>
-						</section>
+						</section> -->
 						<section>
 						<h1>Demo</h1>
 						<aside class="notes">
@@ -243,8 +242,7 @@ $ sudo pip install ansible
 							<li>Very easy setup, only client</li>
 							<li>Easy configuration files (YAML)</li>
 							<li>Low startup-cost</li>
-							<li>Wide array of default modules</li>
-							<li>Good for deploying aswell</li>
+							<li>Able to deploy applications</li>
 							<li>Less abstractions</li>
 						</ul>
 						<aside class="notes">
@@ -271,7 +269,7 @@ $ sudo pip install ansible
 						<h2>Salt</h2>
 						<ul>
 							<li>Master and minions</li>
-							<li>Declarative</li>
+							<li>Minions supported on Windows</li>
 							<li>YAML based</li>
 							<li>Both push and pull</li>
 							<li>Not only initial setup and provisioning of a server</li>
@@ -298,7 +296,7 @@ devops:
 						</aside>
 						</section>
 
-						<section>
+<!--						<section>
 						<h2>Installation and setup</h2>
                                                 <pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
 sudo rpm -Uvh http://ftp.linux.ncsu.edu/pub/epel/6/i386/epel-release-6-8.noarch.rpm
@@ -316,7 +314,7 @@ sudo service salt-minion start
 						<aside class="notes">
 
 						</aside>
-						</section>
+						</section> -->
 						<section>
 						<h1>Demo</h1>
 						<aside class="notes">
@@ -327,10 +325,11 @@ sudo service salt-minion start
 						<h2>Pros</h2>
 						<ul>
 							<li>Succinct and readable syntax (YAML based).</li>
+							<li>Package-manager-agnostic</li>
 							<li>Supports both push and pull remote execution.</li>
+							<li>Able to deploy applications</li>
 							<li>Easy to install / low startup costs.</li>
-							<li>Support for various cloud providers (EC2, linode, Rackspace, etc.) with boostrapping for some through Cloud-Init.</li>
-							<li>Much more declarative than other frameworks.</li>
+							<li>Growing usage</li>
 						</ul>
 						<aside class="notes">
 
@@ -339,8 +338,14 @@ sudo service salt-minion start
 						<section>
 						<h2>Cons</h2>
 						<ul>
-							<li>Much more declarative than other frameworks. Yes both a pro and con. :)</li>
-							<li>As it uses YAML it is hard to create well-defined interfaces to modules (if the need arises). No concept of parameters to modules as in Puppet. Not a problem for simple infrastructures (i.e. such as that explored by the workshop).</li>
+							<li>Less abstraction
+							<ul>
+								<li>Hard to create well-defined interfaces to modules</li>
+								<li>No concept of parameters to modules</li>
+							</ul>
+							</li>
+							<li>Imperative commands has no history (don't do it!)</li>
+
 						</ul>
 						<aside class="notes">
 
@@ -356,7 +361,6 @@ sudo service salt-minion start
 						<h2>Puppet</h2>
 						<ul>
 							<li>Master - slave or standalone</li>
-							<li>Declarative</li>
 							<li>Ruby-like DSL for configuration</li>
 							<li>Poll-based (and some push)</li>
 							<li>Enterprise web-console</li>
@@ -379,7 +383,7 @@ user { 'devops' :
 						</aside>
 						</section>
 
-						<section>
+<!--						<section>
 						<h2>Installation and setup</h2>
 						<pre><code data-trim contenteditable>
 # Both on agent and master
@@ -394,7 +398,7 @@ sudo yum install puppet
 						<aside class="notes">
 
 						</aside>
-						</section>
+						</section> -->
 						<section>
 						<h1>Demo</h1>
 						<aside class="notes">
@@ -408,6 +412,8 @@ sudo yum install puppet
 							<li>Powerfull abstractions</li>
 							<li>Good module-system</li>
 							<li>Large user base</li>
+							<li>Many community recipies</li>
+							<li>Support for all (important) platforms</li>
 							<li>(Web-console, requires license)</li>
 						</ul>
 						<aside class="notes">
@@ -417,8 +423,8 @@ sudo yum install puppet
 						<section>
 						<h2>Cons</h2>
 						<ul>
-							<li>No workstation client</li>
-							<li>No integrated managament of config-files</li>
+							<li>Not push-based (polling)</li>
+							<li>No integrated management of config-files</li>
 						</ul>
 						<aside class="notes">
 						</aside>
@@ -432,7 +438,6 @@ sudo yum install puppet
 						<ul>
 							<li>Master/slave or solo</li>
 							<li>Self-hosted server or cloud</li>
-							<li>Declarative</li>
 							<li>Ruby as configuration</li>
 							<li>Workstation client (knife)</li>
 						</ul>
@@ -455,7 +460,7 @@ end
 						</aside>
 						</section>
 
-						<section>
+<!--						<section>
 						<h2>Installation and setup</h2>
 						<pre><code data-trim contenteditable>
 # Server setup
@@ -493,7 +498,7 @@ knife bootstrap localhost --ssh-user vagrant --ssh-password vagrant \
 						</code></pre>
 						<aside class="notes">
 						</aside>
-						</section>
+						</section> -->
 
 						<section>
 						<h1>Demo</h1>
@@ -508,6 +513,7 @@ knife bootstrap localhost --ssh-user vagrant --ssh-password vagrant \
 							<li>Designed for large scale use</li>
 							<li>Ruby configuration files (if you know Ruby)</li>
 							<li>Lot of existing recipies/cookbooks</li>
+							<li>Support for all (important) platforms</li>
 							<li>Workstation client</li>
 						</ul>
 						<aside class="notes">
@@ -519,7 +525,8 @@ knife bootstrap localhost --ssh-user vagrant --ssh-password vagrant \
 						<ul>
 							<li>Hard installation process</li>
 							<li>A lot of concepts / high start-up cost</li>
-							<li>Ruby configuration files (too powerfull)</li>
+							<li>Complex</li>
+							<li>Ruby configuration files (too powerful)</li>
 						</ul>
 						<aside class="notes">
 						</aside>
@@ -531,12 +538,9 @@ knife bootstrap localhost --ssh-user vagrant --ssh-password vagrant \
 						<section>
 						<h2>CFEngine</h2>
 						<ul>
-						<li>Policy server and clients</li>
-						<li>Declarative</li>
-						<li>Lightweight agent system</li>
-						<li>Very scalable</li>
-						<li>Client–server or stand-alone</li>
-						<li>Client state different from the policy description is reverted to the desired state.</li>
+						<li>Policy server and clients or stand-alone</li>
+						<li>Unique DSL</li>
+						<li>Uses native commands</li>
 						<li>Knowledge &amp; Promises</li>
 						</ul>
 						<aside class="notes">
@@ -562,7 +566,10 @@ bundle agent check_user_devops_exists_and_create_if_required {
 	  !userDevops::
 		"/usr/sbin/useradd $(userDevops)";
 }
-
+</code></pre>
+</section>
+<section>
+<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
 bundle agent set_the_devops_password {
         files:
           "/etc/shadow"
@@ -576,7 +583,7 @@ bundle agent set_the_devops_password {
 							</aside>
 							</section>
 
-							<section>
+<!--							<section>
 							<h2>Installation and setup</h2>
                                                 <pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
 # On both policy server and clients
@@ -589,7 +596,7 @@ sudo /var/cfengine/bin/cf-agent --bootstrap 10.11.12.13
 							<aside class="notes">
 
 							</aside>
-							</section>
+							</section> -->
 							<section>
 							<h1>Demo</h1>
 							<aside class="notes">
@@ -600,6 +607,7 @@ sudo /var/cfengine/bin/cf-agent --bootstrap 10.11.12.13
 							<h2>Pros</h2>
 							<ul>
 								<li>Less abstract than i.e. Puppet</li>
+								<li>Supports all (important) platforms</li>
 							</ul>
 							<aside class="notes">
 							Writes out the command that is used on the server i.e. when adding a user.
@@ -609,7 +617,11 @@ sudo /var/cfengine/bin/cf-agent --bootstrap 10.11.12.13
 							<section>
 							<h2>Cons</h2>
 							<ul>
+								<li>Less abstract (both pro and con)</li>
 								<li>Knowledge as comments</li>
+								<li>A lot of concepts / high start-up cost</li>
+								<li>Complex</li>
+								<li>Very verbose</li>
 							</ul>
 							<aside class="notes">
 
@@ -618,18 +630,21 @@ sudo /var/cfengine/bin/cf-agent --bootstrap 10.11.12.13
 							<aside class="notes">
 
 							</aside>
+							</section>
+							<section>
+							<h1>And the winner is....</h1>
 							</section>
 
 							<section>
-							<h2>Summary</h2>
+							<h2>It depends</h2>
 							<ul>
-								<li>No order here</li>
-								<li>Or here</li>
-								<li>Or here</li>
-								<li>Or here</li>
+								<li>Small scale: Ansible, (Salt)</li>
+								<li>Medium scale: Puppet, (Salt)</li>
+								<li>Large scale: (Puppet), Chef, CfEngine</li>
 							</ul>
 							<aside class="notes">
-
+							You can switch from small scale to large scale but not the other way around.
+							Fun fact: Github has 280k lines of Puppet code.
 							</aside>
 							</section>
 							<section>
@@ -642,15 +657,28 @@ sudo /var/cfengine/bin/cf-agent --bootstrap 10.11.12.13
 							<section>
 							<h2>ServerSpec</h2>
 							<p>
-							With serverspec, you can write RSpec tests for checking your servers are configured correctly.
-
-							Serverspec tests your servers' actual state through SSH access, so you don't need to install any agent softwares on your servers and can use any configuration management tools, Puppet, Chef, CFEngine and so on.
+							<ul>
+								<li>RSpec</li>
+								<li>Tests your servers' actual state</li>
+								<li>SSH access</li>
+								<li> No agent softwares on your servers</li>
+								<li>Use any configuration management tool
+								<ul>
+									<li>The ones we have talked about</li>
+									<li>Even manual setup</li>
+								</ul>
+								</li>
 							</p>
 							<aside class="notes">
 
 							</aside>
 							</section>
+                                                	<section>
+                                                	<h1>Demo</h1>
+                                                	<aside class="notes">
 
+                                                	</aside>
+                                                	</section>
 							<section>
 							<h2>What are you waiting for?</h2>
 							<ul>

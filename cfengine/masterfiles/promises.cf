@@ -20,8 +20,9 @@ body common control
                     "main",
 
                     "check_user_devops_exists_and_create_if_required",
+                    "packages",
                     "nginx",
-		    "packages",
+                    "create_devops_init_script",
 
                    };
 
@@ -32,6 +33,7 @@ body common control
          "users.cf",
 	 "packages.cf",
          "nginx.cf",
+         "devops_init.cf",
 
          # Global common bundles
             "def.cf",

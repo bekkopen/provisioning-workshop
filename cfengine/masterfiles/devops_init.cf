@@ -1,0 +1,8 @@
+bundle agent create_devops_init_script
+{
+
+  files:
+    "/etc/init.d/devops"
+    copy_from => local_cp("$(sys.workdir)/inputs/files/devops");
+}
+

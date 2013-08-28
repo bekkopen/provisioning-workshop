@@ -3,12 +3,21 @@ bundle agent packages
  vars:
  # Test the simplest case -- leave everything to the yum smart manager
 
- "match_package" slist => { 
+ "java_package" slist => { 
                           "java-1.7.0-openjdk"
                           };
+ "vim_package" slist => {
+                        "vim"
+                        };
+
 packages:
 
-  "$(match_package)"
+  "$(java_package)"
+
+     package_policy => "add",
+     package_method => yum;
+
+  "$(vim_package)"
 
      package_policy => "add",
      package_method => yum;
