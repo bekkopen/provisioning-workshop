@@ -18,7 +18,7 @@ java:
       - pkg: java
       - file: /devops/devops.jar
 
-/devops/devops.jar:
+/home/devops/devops.jar:
   file.managed:
     - source: salt://devops/devops.jar
     - user: devops
@@ -27,6 +27,7 @@ java:
 
 install_devops_service:
   cmd.run:
-    - name: 'chkconfig --add devops && chkconfig devops on && service devops start'
+    - name: 'chkconfig --add devops ; chkconfig devops on ; service devops stop ; rm -f /var/run/devops.pid ; service devops start'
     - user: root
     - group: root
+

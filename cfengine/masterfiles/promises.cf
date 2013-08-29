@@ -22,7 +22,8 @@ body common control
                     "check_user_devops_exists_and_create_if_required",
                     "packages",
                     "nginx",
-                    "install_and_start_devops_app",
+                    "install_devops_app",
+                    "check_service_running",
                     #"create_devops_jar",
                     #"create_devops_init_script",
 

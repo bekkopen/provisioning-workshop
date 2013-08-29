@@ -1,20 +1,43 @@
-bundle agent install_and_start_devops_app
+bundle agent install_devops_app
 {
 
-files:
+  files:
     "/home/devops/devops.jar"
     copy_from => local_cp("$(sys.workdir)/inputs/files/devops.jar");
 
-  files:
     "/etc/init.d/devops"
-    copy_from => local_cp("$(sys.workdir)/inputs/files/devops");
+    copy_from => local_cp("$(sys.workdir)/inputs/files/devops"),
+    perms => m("0755");
 
   classes:
       "devops_jar_is_present" expression => fileexists("/home/devops/devops.jar");
 
-  commands:
-    devops_jar_is_present::
-      "/etc/init.d/devops restart";
+#  commands:
+#    devops_jar_is_present::
+#      "/etc/init.d/devops restart";
 
+}
+
+bundle agent check_service_running {
+
+    vars:
+        "service" slist => {"dpost"};
+        "daemon_path" string => "/etc/init.d";
+
+    processes:
+            "^$(service)"
+            # promiser is regex pattern on process table.
+            # $(service) will set up an implicit loop over @(service)
+                comment => "Check processes running for '$(service)'",
+                restart_class => "restart_$(service)";
+                # restart_class sets up a class if the regex match FAILS;
+                # ifvarclass checks it
+
+    commands:
+        "${daemon_path}/${service} start"
+            comment => "Execute the start command for the service",
+            ifvarclass => "restart_${service}";
+            # ifvarclass is a class predicate that is AND'ed with
+            # the class expression
 }
 

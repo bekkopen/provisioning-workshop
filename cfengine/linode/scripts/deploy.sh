@@ -31,21 +31,29 @@ fi
 
 if [ "${policyserver}" == "${host}" ] || [ "${client}" == "${host}" ]; then
 
-  rsync -p -g -o -r -a -v -z -e "ssh -l root" --delete scripts root@${host}:
-  rsync -p -g -o -r -a -v -z -e "ssh -l root" --delete files root@${host}:
+  rsync -r -a -v -z -e "ssh -l root" --delete . root@${host}:
 
-  deployers_key="$(cat ~/.ssh/id_rsa.pub)" && echo "deployers key is ${deployers_key}"
-  ssh root@${host} "mkdir -p .ssh && chown -R root:root ./ && ./scripts/ssh_keys.sh \"${deployers_key}\" && ./scripts/ssh_credentials.sh"
-  scp ../ssh/id_rsa* root@${host}:.ssh/
-  ssh root@${host} "hostname ${host} && echo \"hostname set to ${host}\""
-  ssh root@${host} ./scripts/hosts.sh
-  ssh root@${host} ./scripts/timezone.sh
-  ssh root@${host} ./scripts/disable_firewall.sh
-  ssh root@${host} ./scripts/install_cfengine.sh
-  [ "${policyserver}" == "${host}" ] && rsync -p -g -o -r -a -v -z -e "ssh -l root" --delete ../masterfiles root@${host}:/var/cfengine || echo "Host is not ${policyserver}. Skipping rsync of masterfiles"
-  ssh root@${host} ./scripts/add-agent.sh
-  #ssh root@${host} ./scripts/ssh_test.sh
-[ "${client}" == "${host}" ] && ssh root@${host} ./scripts/start-agent.sh || echo "Host is not ${client} Skipping start-agent.sh"
+  cmd="ln -nsf /usr/share/zoneinfo/Europe/Oslo /etc/localtime ; "
+  cmd+="/etc/init.d/iptables stop ; "
+  cmd+="mkdir -p .ssh ; "
+  cmd+="chown -R root:root . ; "
+  cmd+="chmod 550 ./ ; chmod 700 .ssh ; chmod 644 .ssh/id_rsa.pub .ssh/known_hosts ; chmod 600 .ssh/id_rsa .ssh/authorized_keys ; "
+  cmd+="hostname ${host} ; echo \"hostname set to ${host}\" ; "
+  cmd+="grep -q cfengine /etc/hosts 2> /dev/null || echo \"178.79.163.71   cfengine   ${client}\" >> /etc/hosts ; "
+  cmd+="grep -q policyserver /etc/hosts 2> /dev/null || echo \"176.58.98.241   policyserver ${policyserver}\" >> /etc/hosts ; "
+  cmd+="yum -y install db4 pcre openssl ; "
+  cmd+="rpm -q cfengine-community || rpm -ivh ~/files/cfengine-community-3.5.1-3.x86_64.rpm ; "
+
+  ssh -tt -o StrictHostKeyChecking=no root@${host} "${cmd}"
+
+  [ "${policyserver}" == "${host}" ] && rsync -r -a -v -z -e "ssh -l root" --delete ../masterfiles root@${host}:/var/cfengine || echo "Host is not ${policyserver}. Skipping rsync of masterfiles"
+
+  cmd_after="/var/cfengine/bin/cf-agent --bootstrap policyserver.devops.smat.cc ; "
+  cmd_after+="/var/cfengine/bin/cf-agent"
+  [ "${policyserver}" == "${host}" ] && cmd_after+=" -f /var/cfengine/inputs/update.cf"
+  
+  ssh -tt -o StrictHostKeyChecking=no root@${host} "${cmd_after}"
+
 else
   echo "Illegal host: ${host}. Should be ${policyserver} or ${client}." && exit 1
 fi

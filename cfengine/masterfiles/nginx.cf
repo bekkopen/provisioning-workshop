@@ -28,6 +28,9 @@ enabled=1";
     edit_line => insert_lines("$(redirect_server)"),
     create => "true",
     classes => if_repaired("restart_nginx");
+    
+    "/etc/nginx/conf.d/default.conf"
+    delete        => tidy;
 
   packages:
       "nginx" package_policy => "add",
