@@ -49,8 +49,6 @@ if [ "${policyserver}" == "${host}" ] || [ "${client}" == "${host}" ]; then
   [ "${policyserver}" == "${host}" ] && rsync -r -a -v -z -e "ssh -l root" --delete ../masterfiles root@${host}:/var/cfengine || echo "Host is not ${policyserver}. Skipping rsync of masterfiles"
 
   cmd_after="/var/cfengine/bin/cf-agent --bootstrap policyserver.devops.smat.cc ; "
-  cmd_after+="/var/cfengine/bin/cf-agent"
-  [ "${policyserver}" == "${host}" ] && cmd_after+=" -f /var/cfengine/inputs/update.cf"
   
   ssh -tt -o StrictHostKeyChecking=no root@${host} "${cmd_after}"
 
