@@ -16,7 +16,7 @@ java:
     - mode: 755
     - require:
       - pkg: java
-      - file: /devops/devops.jar
+      - file: /home/devops/devops.jar
 
 /home/devops/devops.jar:
   file.managed:
@@ -27,7 +27,14 @@ java:
 
 install_devops_service:
   cmd.run:
-    - name: 'chkconfig --add devops ; chkconfig devops on ; service devops stop ; rm -f /var/run/devops.pid ; service devops start'
+    - name: 'chkconfig --add devops ; chkconfig devops on'
     - user: root
     - group: root
 
+start_devops_service:
+  cmd.run:
+    - name: 'service devops restart'
+    - user: root
+    - group: root
+    - require:
+      - cmd: install_devops_service

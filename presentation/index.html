@@ -86,10 +86,6 @@
 				<ul>
 					<li class="fragment">Unfamiliar to "old school operators"</li>
 					<li class="fragment">Operations is unfamiliar to developers</li>
-					<li class="fragment">Depends on organizational structure
-					<ul>
-						<li>From Silos to DevOps</li>
-					</ul>
 					<li class="fragment">Startup cost
 					<ul>
 						<li>Training</li>
@@ -111,7 +107,6 @@
 						<li>Master/Minion</li>
 						<li>Puppetmaster/Agent</li>
 					</ul>
-					<li>SSH</li>
 					<li>Imperative versus declarative</li>
 				</ul>
 				<aside class="notes">
@@ -120,7 +115,7 @@
 				</section>
 
 				<section>
-				<div style="width: 65%; float: left">
+				<div style="width: 63%; float: left">
 					<h2>Imperative</h2>
 					<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
 #!/bin/bash
@@ -142,7 +137,7 @@ fi
 					</code></pre>
 					</div>
 
-					<div style="width: 35%; float: right">
+					<div style="width: 37%; float: right">
 						<h2>Declarative</h2>
 						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
 package { "vim":
@@ -151,6 +146,7 @@ package { "vim":
 
 file { "/etc/vim/vimrc":
   content =&gt; "set nocp",
+  require =&gt;  Package["vim"],
 }
 					</code></pre>
 						</div>
@@ -363,7 +359,6 @@ sudo service salt-minion start
 							<li>Master - slave or standalone</li>
 							<li>Ruby-like DSL for configuration</li>
 							<li>Poll-based (and some push)</li>
-							<li>Enterprise web-console</li>
 						</ul>
 						<aside class="notes">
 
@@ -414,7 +409,6 @@ sudo yum install puppet
 							<li>Large user base</li>
 							<li>Many community recipies</li>
 							<li>Support for all (important) platforms</li>
-							<li>(Web-console, requires license)</li>
 						</ul>
 						<aside class="notes">
 						</aside>
