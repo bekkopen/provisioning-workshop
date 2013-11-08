@@ -5,13 +5,13 @@ class apps {
 		name => 'openjdk-6-jre',
 	}
 
-	file { 'devops.jar' :
+	file { 'jar' :
 		ensure => present,
 		source => '/etc/puppet/files/devops.jar'
 	}
 
 	exec { 'devops.jar' :
-		require => [Package['java'], File['devops.jar']],
+		require => [Package['java'], File['jar']],
 		command => 'java -jar /home/devops/devops.jar',
 	}
 }
