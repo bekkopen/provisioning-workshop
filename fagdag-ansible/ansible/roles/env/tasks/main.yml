@@ -1,2 +1,4 @@
 - include: users.yml
 - include: nginx.yml
+- include: python.yml
+- include: git.yml

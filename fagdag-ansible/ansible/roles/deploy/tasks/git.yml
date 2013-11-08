@@ -1,0 +1,4 @@
+- name: Fetch newest version of the app via git
+  git:  repo={{git_repo}}
+        dest={{project_root}}
+        version={{git_version}}

@@ -1,0 +1,18 @@
+- name: Deploy application
+  hosts: linode
+  roles:
+    - deploy
+  user: app
+
+  vars:
+    home_path: "/home/{{ ansible_user_id }}"
+    app_path: "{{ home_path }}/app/"
+    virtualenv_path: "{{ app_path }}/env"
+    git_repo: "https://github.com/Espenhh/django-app.git"
+    project_root: "{{ app_path }}/repo"
+
+  vars_prompt:
+    - name: "git_version"
+      prompt: "Git version"
+      private: no
+      default: "HEAD"
