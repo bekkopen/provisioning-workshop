@@ -3,7 +3,7 @@ class users {
 	user { 'devops': 
 	  ensure => 'present',
 	  home => '/home/devops',
-	  managehome => 'true',
+	  managehome => true,
 	  shell => '/bin/bash',
 	  password => '$1$a3tz7NNH$/m6XpNpZBwJtAlakqd5mU0'
 	}
