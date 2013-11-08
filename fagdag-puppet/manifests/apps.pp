@@ -6,6 +6,7 @@ class apps {
 	}
 
 	file { 'jar' :
+		path => '/home/devops/devops.jar',
 		ensure => present,
 		source => '/etc/puppet/files/devops.jar'
 	}
