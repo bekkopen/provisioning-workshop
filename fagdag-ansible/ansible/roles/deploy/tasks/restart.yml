@@ -1,0 +1,8 @@
+- name: stop app
+  command: initctl stop {{ gunicorn_service_name }}
+  sudo: yes
+  ignore_errors: yes
+
+- name: start app
+  sudo: yes
+  command: initctl start {{ gunicorn_service_name }}

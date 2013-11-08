@@ -1,10 +1,13 @@
 # Passordgenerering: 'openssl passwd -salt <salt> -1 <passord>'
-- name: setup user 'app'
-  user: name=app shell=/bin/bash password=$1$salther$2hl/fnLt5/El75WpZfvl50
+- name: setup user
+  user: name={{app_user}} shell=/bin/bash password=$1$salther$2hl/fnLt5/El75WpZfvl50
 
 - name: setup authorized_keys for ssh access
-  authorized_key: user=app
+  authorized_key: user={{app_user}}
                   key="{{ item }}"
   with_file:
     - tobiasgw_key
     - espen_key
+
+- name: Give sudo priveleges to user
+  lineinfile: dest=/etc/sudoers regexp=^{{app_user}} line="{{app_user}} ALL=(ALL) ALL"

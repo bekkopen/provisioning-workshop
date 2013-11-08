@@ -5,11 +5,14 @@
   user: app
 
   vars:
+    app_name: "ansibledjango"
     home_path: "/home/{{ ansible_user_id }}"
-    app_path: "{{ home_path }}/app/"
+    app_path: "{{ home_path }}/app"
     virtualenv_path: "{{ app_path }}/env"
     git_repo: "https://github.com/Espenhh/django-app.git"
     project_root: "{{ app_path }}/repo"
+    requirements_path: "{{ project_root }}/requirements.txt"
+    gunicorn_service_name: "gunicorn_{{ app_name }}"
 
   vars_prompt:
     - name: "git_version"

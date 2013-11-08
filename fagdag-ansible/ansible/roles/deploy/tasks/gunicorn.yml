@@ -1,0 +1,3 @@
+- name: copy gunicorn upstart script
+  template: src=gunicorn_upstart.conf dest=/etc/init/{{ gunicorn_service_name }}.conf
+  sudo: yes

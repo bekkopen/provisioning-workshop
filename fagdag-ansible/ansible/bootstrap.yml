@@ -3,3 +3,6 @@
   roles:
     - env
   user: root
+
+  vars:
+    app_user: "app"
