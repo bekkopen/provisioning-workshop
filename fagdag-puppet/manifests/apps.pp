@@ -1,3 +1,5 @@
+import 'users'
+
 class apps {
 	
 	package { 'java' :
@@ -11,9 +13,8 @@ class apps {
 		source => '/etc/puppet/files/devops.jar'
 	}
 
-	exec { 'devops.jar' :
-		require => [Package['java'], File['jar']],
-		path => '/usr/bin',
-		command => 'java -jar /home/devops/devops.jar',
+	service { 'devops.jar' :
+		require => [Package['java'], File['jar'], File['init.sh']],
+		ensure => running
 	}
 }
