@@ -8,6 +8,9 @@ APP_JAR=devops.jar
 DAEMON=/home/devops/devops.jar
 LOGS=/home/devops/logs
 
+# init-functions inneholder status_of_proc
+. /lib/lsb/init-functions
+
 case "$1" in
   start)
     if [ ! -f $PID_FILE ]; then
