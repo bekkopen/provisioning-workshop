@@ -5,6 +5,7 @@
 PID_FILE=/home/devops/devops.pid
 APP_HOME=/home/devops
 APP_JAR=devops.jar
+DAEMON=/home/devops/devops.jar
 LOGS=/home/devops/logs
 
 case "$1" in
@@ -37,6 +38,9 @@ echo "devops already stopped"
     $0 stop
     $0 start
     ;;
+  status)
+	status_of_proc -p $PID_FILE "$DAEMON" devopsjavaapp
+	;;
   *)
     echo "Usage: $0 {start|stop|restart}"
     ;;
