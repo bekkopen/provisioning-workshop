@@ -13,7 +13,7 @@ class apps {
 
 	exec { 'devops.jar' :
 		require => [Package['java'], File['jar']],
-		path => '/home/devops/',
-		command => 'java -jar devops.jar',
+		path => '/usr/bin',
+		command => 'java -jar /home/devops/devops.jar',
 	}
 }
