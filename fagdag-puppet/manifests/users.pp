@@ -11,7 +11,7 @@ class users {
 	file { "init.sh": 
 	  path => '/home/devops/init.sh',
 	  ensure => 'present',
-	  source => '../files/init.sh'
+	  source => '/etc/puppet/files/init.sh'
 	}
 }
 
