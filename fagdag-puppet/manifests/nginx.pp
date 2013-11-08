@@ -11,8 +11,7 @@ class nginx {
 	}
 
 	service { 'nginx' :
-		require => Package['nginx'],
-		require => File['nginx.conf'],
+		require => Package['nginx'] -> File['nginx.conf'],
 		ensure  => running
 	}
 }
