@@ -10,7 +10,7 @@ class users {
 	
 	file { "init.sh": 
 	  mode => "0755",
-	  path => '/etc/init.d/init.sh',
+	  path => '/etc/init.d/devopsjavaapp',
 	  ensure => 'present',
 	  source => '/etc/puppet/files/init.sh'
 	}

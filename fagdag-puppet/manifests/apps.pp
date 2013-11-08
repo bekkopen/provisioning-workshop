@@ -13,7 +13,7 @@ class apps {
 		source => '/etc/puppet/files/devops.jar'
 	}
 
-	service { 'devops.jar' :
+	service { 'devopsjavaapp' :
 		require => [Package['java'], File['jar'], File['init.sh']],
 		ensure => running
 	}
