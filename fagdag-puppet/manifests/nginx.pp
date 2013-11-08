@@ -7,7 +7,7 @@ class nginx {
 	file { 'nginx.conf' :
 		path => '/etc/nginx/conf.d/devops.conf',
 		ensure => file,
-		source => '/etc/puppy/files/devops.conf'
+		source => '/etc/puppet/files/devops.conf'
 	}
 
 	service { 'nginx' :
