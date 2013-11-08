@@ -7,3 +7,4 @@
                   key="{{ item }}"
   with_file:
     - tobiasgw_key
+    - espen_key
