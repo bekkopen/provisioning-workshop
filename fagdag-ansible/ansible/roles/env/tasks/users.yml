@@ -1,0 +1,3 @@
+# Passordgenerering: 'openssl passwd -salt <salt> -1 <passord>'
+- name: setup user 'app'
+  user: name=app shell=/bin/bash password=$1$salther$2hl/fnLt5/El75WpZfvl50

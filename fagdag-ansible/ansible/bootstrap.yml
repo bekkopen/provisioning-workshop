@@ -1,0 +1,5 @@
+- name: Install environment
+  hosts: linode
+  roles:
+    - env
+  user: root
